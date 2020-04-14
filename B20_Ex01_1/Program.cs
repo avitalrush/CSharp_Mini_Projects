@@ -16,5 +16,14 @@
             }
             return m_decimalNum;
         }
+        static bool checkIfValidNumber(string i_stringInput)
+        {
+            if (isLen9(s) != true)
+                return !true;
+            if (isTheNumberContainOnlyZeroOne(s) != true)
+                return !true;
+            return true;     // base case - so input is valid (if no method returned false)
+        }
+
     }
 }
