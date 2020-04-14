@@ -1,4 +1,6 @@
-﻿namespace B20_Ex01_1
+﻿using System;
+
+namespace B20_Ex01_1
 {
     public class Program
     {
@@ -18,12 +20,22 @@
         }
         static bool checkIfValidNumber(string i_stringInput)
         {
-            if (isLen9(s) != true)
+            if (isLen9(i_stringInput) != true)
                 return !true;
-            if (isTheNumberContainOnlyZeroOne(s) != true)
+            if (isTheNumberContainOnlyZeroOne(i_stringInput) != true)
                 return !true;
             return true;     // base case - so input is valid (if no method returned false)
         }
-
+        static bool isLen9(string i_stringInput)
+        {
+            return (i_stringInput.Length == 9);
+        }
+        static bool isTheNumberContainOnlyZeroOne(string i_stringInput)
+        {
+            for (int i = 0; i < i_stringInput.Length; i++)
+                if (i_stringInput[i] !='0' && i_stringInput[i] !='1')
+                   return !true;
+            return true;
+        }
     }
 }
