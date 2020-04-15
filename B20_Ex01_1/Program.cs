@@ -33,7 +33,8 @@ namespace B20_Ex01_1
             int decInput2 = convertToDec(inputStr2);
             int decInput3 = convertToDec(inputStr3);
 
-            printStatisticsOfInput(inputNum1, inputNum2, inputNum3, inputStr1, inputStr2, inputStr3);
+            printStatisticsOfInput(decInput1, decInput2, decInput3, inputStr1, inputStr2, inputStr3);
+            Console.ReadLine();
         }
 
         private static string getValidInput()
@@ -70,7 +71,10 @@ namespace B20_Ex01_1
 
             printHowManyArePowersOfTwo(i_InputNum1, i_InputNum2, i_InputNum3);
 
-            printHowManyAreAscOrder(i_InputStr1, i_InputStr2, i_InputStr3);
+            string decNumStr1 = i_InputNum1.ToString();
+            string decNumStr2 = i_InputNum2.ToString();
+            string decNumStr3 = i_InputNum3.ToString();
+            printHowManyAreAscOrder(decNumStr1, decNumStr2, decNumStr3);
 
             printMaxNum(i_InputNum1, i_InputNum2, i_InputNum3);
             printMinNum(i_InputNum1, i_InputNum2, i_InputNum3);
@@ -84,7 +88,7 @@ namespace B20_Ex01_1
         private static void printAvgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3)
         {
             int avg = avgNumOfZerosInNum(i_Str1, i_Str2, i_Str3);
-            Console.WriteLine("Average num of Zeros in all {0} numbers is: {1}", k_LenOfInput, avg);
+            Console.WriteLine("Average num of Zeros in all {0} numbers is: {1}", k_NumOfNumbers, avg);
         }
 
         private static int avgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3)
@@ -114,16 +118,16 @@ namespace B20_Ex01_1
         private static void printAvgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)
         {
             int avg = avgNumOfOnesInNum(i_Str1, i_Str2, i_Str3);
-            Console.WriteLine("Average num of Ones in all {0} numbers is: {1}", k_LenOfInput, avg);
+            Console.WriteLine("Average num of Ones in all {0} numbers is: {1}", k_NumOfNumbers, avg);
         }
 
         private static int avgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)
         {
             int totalOnesCount = 0;
             int avgOfOnes;
-            totalOnesCount += countNumOfZeros(i_Str1);
-            totalOnesCount += countNumOfZeros(i_Str2);
-            totalOnesCount += countNumOfZeros(i_Str3);
+            totalOnesCount += countNumOfOnes(i_Str1);
+            totalOnesCount += countNumOfOnes(i_Str2);
+            totalOnesCount += countNumOfOnes(i_Str3);
             return avgOfOnes = totalOnesCount / k_NumOfNumbers;
         }
 
@@ -181,9 +185,9 @@ namespace B20_Ex01_1
 
         private static bool isDigitsInAscendingOrder(string i_Str)
         {
-            for(int i = 1; i < k_LenOfInput; i++)
+            for(int i = 1; i < i_Str.Length; i++)
             {
-                if(i_Str[i] < i_Str[i - 1])
+                if(i_Str[i] <= i_Str[i - 1])
                 {
                     return !true;
                 }
@@ -204,7 +208,10 @@ namespace B20_Ex01_1
             int min = Math.Min(tempMin, i_Num3);
             Console.WriteLine("The Min num is {0}", min);
         }
-        static int convertFromBinaryToDecimal(string i_stringInput)
+
+        ////////////////////////////////////////////////////////////////////
+        
+        static int convertToDec(string i_stringInput)
         {
             int m_decimalNum = 0;
             for (int i = 0; i <= (i_stringInput.Length) - 1; i++)
@@ -214,7 +221,8 @@ namespace B20_Ex01_1
             }
             return m_decimalNum;
         }
-        static bool checkIfValidNumber(string i_stringInput)
+
+        static bool checkIfValidInput(string i_stringInput)
         {
             if (isLen9(i_stringInput) != true)
                 return !true;
@@ -222,10 +230,12 @@ namespace B20_Ex01_1
                 return !true;
             return true;     // base case - so input is valid (if no method returned false)
         }
+
         static bool isLen9(string i_stringInput)
         {
             return (i_stringInput.Length == 9);
         }
+
         static bool isTheNumberContainOnlyZeroOne(string i_stringInput)
         {
             for (int i = 0; i < i_stringInput.Length; i++)
