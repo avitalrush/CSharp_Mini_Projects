@@ -14,7 +14,6 @@ namespace B20_Ex01_1
 
         private static void start()
         {
-            // MAATEFET method
             Console.WriteLine("Please enter " + k_NumOfNumbers + " " + k_LenOfInput + "-digits binary numbers.");
 
             Console.WriteLine("Please enter the first number:");
@@ -29,7 +28,7 @@ namespace B20_Ex01_1
             string inputStr3 = getValidInput();
             int inputNum3 = int.Parse(inputStr3);
 
-            int decInput1 = convertFromBinaryToDecimal(inputStr1); // Shaked DONE /// /// SHAKED writes convertToDec(string s) method 
+            int decInput1 = convertFromBinaryToDecimal(inputStr1);
             int decInput2 = convertFromBinaryToDecimal(inputStr2);
             int decInput3 = convertFromBinaryToDecimal(inputStr3);
 
@@ -39,13 +38,12 @@ namespace B20_Ex01_1
 
         private static string getValidInput()
         {
-            // method that gets input string from user, check it's validity and returns it
             string inputStr;
             bool isValidInput;
             do
             {
                 inputStr = getInput();
-                isValidInput = checkIfValidInput(inputStr); // Shaked DONE /// /// SHAKED writes checkIfValidInput(string s) method
+                isValidInput = checkIfValidInput(inputStr);
             }
             while(isValidInput == !true);
             return inputStr;
@@ -53,7 +51,6 @@ namespace B20_Ex01_1
 
         private static string getInput()
         {
-            // method that gets string input from user and returns it
             string inputStr = Console.ReadLine();
             return inputStr;
         }
@@ -222,12 +219,12 @@ namespace B20_Ex01_1
       
         private static bool checkIfValidInput(string i_Str)
         {
-            bool v_InputLenIsValid = true;
-            if (isInputLenValid(i_Str) != v_InputLenIsValid)
-                return !v_InputLenIsValid;
-            if (isInputContainOnlyZeroOne(i_Str) != v_InputLenIsValid)
-                return !v_InputLenIsValid;
-            return v_InputLenIsValid;     // base case - so input is valid (if no method returned false)
+            bool v_InputIsValid = true;
+            if (!isInputLenValid(i_Str))
+               return !v_InputIsValid;
+            if (!isInputContainOnlyZeroOne(i_Str))
+                return !v_InputIsValid;
+            return v_InputLenIsValid;
         }
       
         private static bool isInputLenValid(string i_Str)
