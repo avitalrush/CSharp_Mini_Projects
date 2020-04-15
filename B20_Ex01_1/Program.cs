@@ -6,6 +6,8 @@ namespace B20_Ex01_1
     {
         private const int k_NumOfNumbers = 3;
         private const int k_LenOfInput = 9;
+        private const bool v_InputLenIsValid = true;
+        private const bool v_InputContainsOnlyOnesZeros = true;
 
         public static void Main()
         {
@@ -216,22 +218,22 @@ namespace B20_Ex01_1
         }
         private static bool checkIfValidInput(string i_StringInput)
         {
-            if (isLen9(i_StringInput) != true)
-                return !true;
-            if (isTheNumberContainOnlyZeroOne(i_StringInput) != true)
+            if (isInputLenValid(i_StringInput) != v_InputLenIsValid)
+                return !v_InputLenIsValid;
+            if (isInputContainOnlyZeroOne(i_StringInput) != true)
                 return !true;
             return true;     // base case - so input is valid (if no method returned false)
         }
-        private static bool isLen9(string i_StringInput)
+        private static bool isInputLenValid(string i_StringInput)
         {
-            return (i_StringInput.Length == 9);
+            return (i_StringInput.Length == k_LenOfInput);
         }
-        private static bool isTheNumberContainOnlyZeroOne(string i_StringInput)
+        private static bool isInputContainOnlyZeroOne(string i_StringInput)
         {
             for (int i = 0; i < i_StringInput.Length; i++)
                 if (i_StringInput[i] !='0' && i_StringInput[i] !='1')
-                   return !true;
-            return true;
+                   return !v_InputContainsOnlyOnesZeros;
+            return v_InputContainsOnlyOnesZeros;
         }
     }
 }
