@@ -50,7 +50,7 @@ namespace B20_Ex01_1
                 inputStr = getInput();
                 isValidInput = checkIfValidInput(inputStr);
             }
-            while(isValidInput == !true);
+            while (isValidInput == !true);
 
             return inputStr;
         }
@@ -62,8 +62,8 @@ namespace B20_Ex01_1
             return inputStr;
         }
 
-        private static void printStatisticsOfInput(int i_InputNum1, int i_InputNum2, int i_InputNum3, 
-                                                    string i_InputStr1, string i_InputStr2, string i_InputStr3)
+        private static void printStatisticsOfInput(int i_InputNum1, int i_InputNum2, int i_InputNum3,
+                                                   string i_InputStr1, string i_InputStr2, string i_InputStr3)
         {
             string decNumStr1 = i_InputNum1.ToString();
             string decNumStr2 = i_InputNum2.ToString();
@@ -113,9 +113,9 @@ namespace B20_Ex01_1
         {
             int countZeros = 0;
 
-            for(int i = 0; i< k_LenOfInput; i++)
+            for (int i = 0; i < k_LenOfInput; i++)
             {
-                if(i_Str[i] == '0')
+                if (i_Str[i] == '0')
                 {
                     countZeros++;
                 }
@@ -162,17 +162,17 @@ namespace B20_Ex01_1
         {
             int countPowersOfTwo = 0;
 
-            if(isPowerOfTwo(i_Num1))
+            if (isPowerOfTwo(i_Num1))
             {
                 countPowersOfTwo++;
             }
 
-            if(isPowerOfTwo(i_Num2))
+            if (isPowerOfTwo(i_Num2))
             {
                 countPowersOfTwo++;
             }
 
-            if(isPowerOfTwo(i_Num3))
+            if (isPowerOfTwo(i_Num3))
             {
                 countPowersOfTwo++;
             }
@@ -194,17 +194,17 @@ namespace B20_Ex01_1
         {
             int countAscOrder = 0;
 
-            if(isDigitsInAscendingOrder(i_Str1))
+            if (isDigitsInAscendingOrder(i_Str1))
             {
                 countAscOrder++;
             }
 
-            if(isDigitsInAscendingOrder(i_Str2))
+            if (isDigitsInAscendingOrder(i_Str2))
             {
                 countAscOrder++;
             }
 
-            if(isDigitsInAscendingOrder(i_Str3))
+            if (isDigitsInAscendingOrder(i_Str3))
             {
                 countAscOrder++;
             }
@@ -218,7 +218,7 @@ namespace B20_Ex01_1
 
             for (int i = 1; i < i_Str.Length && digitsInAscendingOrder; i++)
             {
-                if(i_Str[i] <= i_Str[i - 1])
+                if (i_Str[i] <= i_Str[i - 1])
                 {
                     digitsInAscendingOrder = false;
                 }
@@ -255,24 +255,24 @@ namespace B20_Ex01_1
 
             return decimalNum;
         }
-      
+
         private static bool checkIfValidInput(string i_Str)
         {
             return (isInputLenValid(i_Str) && isInputContainOnlyZeroOne(i_Str));
         }
-      
+
         private static bool isInputLenValid(string i_Str)
         {
             return (i_Str.Length == k_LenOfInput);
         }
-        
+
         private static bool isInputContainOnlyZeroOne(string i_Str)
         {
             bool inputContainOnlyZeroOne = true;
 
-            for(int i = 0; i < i_Str.Length && inputContainOnlyZeroOne; i++)
+            for (int i = 0; i < i_Str.Length && inputContainOnlyZeroOne; i++)
             {
-                if(i_Str[i] != '0' && i_Str[i] != '1')
+                if (i_Str[i] != '0' && i_Str[i] != '1')
                 {
                     inputContainOnlyZeroOne = false;
                 }
