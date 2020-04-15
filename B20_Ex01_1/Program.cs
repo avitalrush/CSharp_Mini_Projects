@@ -6,8 +6,6 @@ namespace B20_Ex01_1
     {
         private const int k_NumOfNumbers = 3;
         private const int k_LenOfInput = 9;
-        private const bool v_InputLenIsValid = true;              // move that to the methods themselves, because this is relevant only to specific function
-        private const bool v_InputContainsOnlyOnesZeros = true;   // move that to the methods themselves, because this is relevant only to specific function
 
         public static void Main()
         {
@@ -211,7 +209,7 @@ namespace B20_Ex01_1
             Console.WriteLine("The Min num is {0}", min);
         }
 
-       private static int convertToDec(string i_Str)
+       private static int convertFromBinaryToDecimal(string i_Str)
         {
             int decimalNum = 0;
             for (int i = 0; i <= (i_Str.Length) - 1; i++)
@@ -224,21 +222,22 @@ namespace B20_Ex01_1
       
         private static bool checkIfValidInput(string i_Str)
         {
+            bool v_InputLenIsValid = true;
             if (isInputLenValid(i_Str) != v_InputLenIsValid)
                 return !v_InputLenIsValid;
-            if (isInputContainOnlyZeroOne(i_Str) != true)
-                return !true;
-            return true;     // base case - so input is valid (if no method returned false)
+            if (isInputContainOnlyZeroOne(i_Str) != v_InputLenIsValid)
+                return !v_InputLenIsValid;
+            return v_InputLenIsValid;     // base case - so input is valid (if no method returned false)
         }
       
         private static bool isInputLenValid(string i_Str)
         {
             return (i_Str.Length == k_LenOfInput);
         }
-      
-
+        
         private static bool isInputContainOnlyZeroOne(string i_Str)
         {
+            bool v_InputContainsOnlyOnesZeros = true;    
             for (int i = 0; i < i_Str.Length; i++)
                 if (i_Str[i] !='0' && i_Str[i] !='1')
                    return !v_InputContainsOnlyOnesZeros;
