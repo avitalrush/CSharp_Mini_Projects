@@ -29,9 +29,9 @@ namespace B20_Ex01_1
             string inputStr3 = getValidInput();
             int inputNum3 = int.Parse(inputStr3);
 
-            int decInput1 = convertToDec(inputStr1); // SHAKED writes convertToDec(string s) method
-            int decInput2 = convertToDec(inputStr2);
-            int decInput3 = convertToDec(inputStr3);
+            int decInput1 = convertFromBinaryToDecimal(inputStr1); // Shaked DONE /// /// SHAKED writes convertToDec(string s) method 
+            int decInput2 = convertFromBinaryToDecimal(inputStr2);
+            int decInput3 = convertFromBinaryToDecimal(inputStr3);
 
             printStatisticsOfInput(inputNum1, inputNum2, inputNum3, inputStr1, inputStr2, inputStr3);
         }
@@ -44,7 +44,7 @@ namespace B20_Ex01_1
             do
             {
                 inputStr = getInput();
-                isValidInput = checkIfValidInput(inputStr); // SHAKED writes checkIfValidInput(string s) method
+                isValidInput = checkIfValidInput(inputStr); // Shaked DONE /// /// SHAKED writes checkIfValidInput(string s) method
             }
             while(isValidInput == !true);
             return inputStr;
@@ -204,32 +204,32 @@ namespace B20_Ex01_1
             int min = Math.Min(tempMin, i_Num3);
             Console.WriteLine("The Min num is {0}", min);
         }
-        static int convertFromBinaryToDecimal(string i_stringInput)
+        private static int convertFromBinaryToDecimal(string i_StringInput)
         {
-            int m_decimalNum = 0;
-            for (int i = 0; i <= (i_stringInput.Length) - 1; i++)
+            int decimalNum = 0;
+            for (int i = 0; i <= (i_StringInput.Length) - 1; i++)
             {
-                m_decimalNum *= 2;
-                m_decimalNum += (int)(i_stringInput[i] - '0');
+                decimalNum *= 2;
+                decimalNum += (int)(i_StringInput[i] - '0');
             }
-            return m_decimalNum;
+            return decimalNum;
         }
-        static bool checkIfValidNumber(string i_stringInput)
+        private static bool checkIfValidInput(string i_StringInput)
         {
-            if (isLen9(i_stringInput) != true)
+            if (isLen9(i_StringInput) != true)
                 return !true;
-            if (isTheNumberContainOnlyZeroOne(i_stringInput) != true)
+            if (isTheNumberContainOnlyZeroOne(i_StringInput) != true)
                 return !true;
             return true;     // base case - so input is valid (if no method returned false)
         }
-        static bool isLen9(string i_stringInput)
+        private static bool isLen9(string i_StringInput)
         {
-            return (i_stringInput.Length == 9);
+            return (i_StringInput.Length == 9);
         }
-        static bool isTheNumberContainOnlyZeroOne(string i_stringInput)
+        private static bool isTheNumberContainOnlyZeroOne(string i_StringInput)
         {
-            for (int i = 0; i < i_stringInput.Length; i++)
-                if (i_stringInput[i] !='0' && i_stringInput[i] !='1')
+            for (int i = 0; i < i_StringInput.Length; i++)
+                if (i_StringInput[i] !='0' && i_StringInput[i] !='1')
                    return !true;
             return true;
         }
