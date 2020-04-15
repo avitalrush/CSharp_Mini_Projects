@@ -6,8 +6,8 @@ namespace B20_Ex01_1
     {
         private const int k_NumOfNumbers = 3;
         private const int k_LenOfInput = 9;
-        private const bool v_InputLenIsValid = true;
-        private const bool v_InputContainsOnlyOnesZeros = true;
+        private const bool v_InputLenIsValid = true;              // move that to the methods themselves, because this is relevant only to specific function
+        private const bool v_InputContainsOnlyOnesZeros = true;   // move that to the methods themselves, because this is relevant only to specific function
 
         public static void Main()
         {
@@ -35,7 +35,8 @@ namespace B20_Ex01_1
             int decInput2 = convertFromBinaryToDecimal(inputStr2);
             int decInput3 = convertFromBinaryToDecimal(inputStr3);
 
-            printStatisticsOfInput(inputNum1, inputNum2, inputNum3, inputStr1, inputStr2, inputStr3);
+            printStatisticsOfInput(decInput1, decInput2, decInput3, inputStr1, inputStr2, inputStr3);
+            Console.ReadLine();
         }
 
         private static string getValidInput()
@@ -72,7 +73,10 @@ namespace B20_Ex01_1
 
             printHowManyArePowersOfTwo(i_InputNum1, i_InputNum2, i_InputNum3);
 
-            printHowManyAreAscOrder(i_InputStr1, i_InputStr2, i_InputStr3);
+            string decNumStr1 = i_InputNum1.ToString();
+            string decNumStr2 = i_InputNum2.ToString();
+            string decNumStr3 = i_InputNum3.ToString();
+            printHowManyAreAscOrder(decNumStr1, decNumStr2, decNumStr3);
 
             printMaxNum(i_InputNum1, i_InputNum2, i_InputNum3);
             printMinNum(i_InputNum1, i_InputNum2, i_InputNum3);
@@ -86,7 +90,7 @@ namespace B20_Ex01_1
         private static void printAvgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3)
         {
             int avg = avgNumOfZerosInNum(i_Str1, i_Str2, i_Str3);
-            Console.WriteLine("Average num of Zeros in all {0} numbers is: {1}", k_LenOfInput, avg);
+            Console.WriteLine("Average num of Zeros in all {0} numbers is: {1}", k_NumOfNumbers, avg);
         }
 
         private static int avgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3)
@@ -116,16 +120,16 @@ namespace B20_Ex01_1
         private static void printAvgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)
         {
             int avg = avgNumOfOnesInNum(i_Str1, i_Str2, i_Str3);
-            Console.WriteLine("Average num of Ones in all {0} numbers is: {1}", k_LenOfInput, avg);
+            Console.WriteLine("Average num of Ones in all {0} numbers is: {1}", k_NumOfNumbers, avg);
         }
 
         private static int avgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)
         {
             int totalOnesCount = 0;
             int avgOfOnes;
-            totalOnesCount += countNumOfZeros(i_Str1);
-            totalOnesCount += countNumOfZeros(i_Str2);
-            totalOnesCount += countNumOfZeros(i_Str3);
+            totalOnesCount += countNumOfOnes(i_Str1);
+            totalOnesCount += countNumOfOnes(i_Str2);
+            totalOnesCount += countNumOfOnes(i_Str3);
             return avgOfOnes = totalOnesCount / k_NumOfNumbers;
         }
 
@@ -183,9 +187,9 @@ namespace B20_Ex01_1
 
         private static bool isDigitsInAscendingOrder(string i_Str)
         {
-            for(int i = 1; i < k_LenOfInput; i++)
+            for(int i = 1; i < i_Str.Length; i++)
             {
-                if(i_Str[i] < i_Str[i - 1])
+                if(i_Str[i] <= i_Str[i - 1])
                 {
                     return !true;
                 }
@@ -206,32 +210,37 @@ namespace B20_Ex01_1
             int min = Math.Min(tempMin, i_Num3);
             Console.WriteLine("The Min num is {0}", min);
         }
-        private static int convertFromBinaryToDecimal(string i_StringInput)
+
+       private static int convertToDec(string i_Str)
         {
             int decimalNum = 0;
-            for (int i = 0; i <= (i_StringInput.Length) - 1; i++)
+            for (int i = 0; i <= (i_Str.Length) - 1; i++)
             {
                 decimalNum *= 2;
-                decimalNum += (int)(i_StringInput[i] - '0');
+                decimalNum += (int)(i_Str[i] - '0');
             }
             return decimalNum;
         }
-        private static bool checkIfValidInput(string i_StringInput)
+      
+        private static bool checkIfValidInput(string i_Str)
         {
-            if (isInputLenValid(i_StringInput) != v_InputLenIsValid)
+            if (isInputLenValid(i_Str) != v_InputLenIsValid)
                 return !v_InputLenIsValid;
-            if (isInputContainOnlyZeroOne(i_StringInput) != true)
+            if (isInputContainOnlyZeroOne(i_Str) != true)
                 return !true;
             return true;     // base case - so input is valid (if no method returned false)
         }
-        private static bool isInputLenValid(string i_StringInput)
+      
+        private static bool isInputLenValid(string i_Str)
         {
-            return (i_StringInput.Length == k_LenOfInput);
+            return (i_Str.Length == k_LenOfInput);
         }
-        private static bool isInputContainOnlyZeroOne(string i_StringInput)
+      
+
+        private static bool isInputContainOnlyZeroOne(string i_Str)
         {
-            for (int i = 0; i < i_StringInput.Length; i++)
-                if (i_StringInput[i] !='0' && i_StringInput[i] !='1')
+            for (int i = 0; i < i_Str.Length; i++)
+                if (i_Str[i] !='0' && i_Str[i] !='1')
                    return !v_InputContainsOnlyOnesZeros;
             return v_InputContainsOnlyOnesZeros;
         }
