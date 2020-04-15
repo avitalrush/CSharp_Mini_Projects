@@ -49,6 +49,10 @@ namespace B20_Ex01_1
             {
                 inputStr = getInput();
                 isValidInput = checkIfValidInput(inputStr);
+                if(!isValidInput)
+                {
+                    Console.WriteLine("Not valid input. Please enter a valid input:");
+                }
             }
             while (isValidInput == !true);
 
@@ -140,7 +144,7 @@ namespace B20_Ex01_1
             totalOnesCount += countNumOfOnes(i_Str2);
             totalOnesCount += countNumOfOnes(i_Str3);
 
-            return avgOfOnes = totalOnesCount / k_NumOfNumbers;
+            return avgOfOnes = (float)totalOnesCount / k_NumOfNumbers;
         }
 
         private static int countNumOfOnes(string i_Str)
