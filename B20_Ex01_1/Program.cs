@@ -166,14 +166,17 @@ namespace B20_Ex01_1
             {
                 countPowersOfTwo++;
             }
+
             if(isPowerOfTwo(i_Num2))
             {
                 countPowersOfTwo++;
             }
+
             if(isPowerOfTwo(i_Num3))
             {
                 countPowersOfTwo++;
             }
+
             Console.WriteLine("{0} of the {1} input numbers are Power of 2", countPowersOfTwo, k_NumOfNumbers);
         }
 
@@ -195,28 +198,33 @@ namespace B20_Ex01_1
             {
                 countAscOrder++;
             }
+
             if(isDigitsInAscendingOrder(i_Str2))
             {
                 countAscOrder++;
             }
+
             if(isDigitsInAscendingOrder(i_Str3))
             {
                 countAscOrder++;
             }
+
             Console.WriteLine("{0} of the {1} input numbers' digits are in Ascending order", countAscOrder, k_NumOfNumbers);
         }
 
         private static bool isDigitsInAscendingOrder(string i_Str)
         {
-            for(int i = 1; i < i_Str.Length; i++)
+            bool digitsInAscendingOrder = true;
+
+            for (int i = 1; i < i_Str.Length && digitsInAscendingOrder; i++)
             {
                 if(i_Str[i] <= i_Str[i - 1])
                 {
-                    return !true;
+                    digitsInAscendingOrder = false;
                 }
             }
 
-            return true;
+            return digitsInAscendingOrder;
         }
 
         private static void printMaxNum(int i_Num1, int i_Num2, int i_Num3)
@@ -235,7 +243,7 @@ namespace B20_Ex01_1
             Console.WriteLine("The Min num is {0}", min);
         }
 
-       private static int convertFromBinaryToDecimal(string i_Str)
+        private static int convertFromBinaryToDecimal(string i_Str)
         {
             int decimalNum = 0;
 
@@ -250,18 +258,7 @@ namespace B20_Ex01_1
       
         private static bool checkIfValidInput(string i_Str)
         {
-            const bool v_InputIsValid = true;
-
-            if(!isInputLenValid(i_Str))
-            {
-                return !v_InputIsValid;
-            }
-            if(!isInputContainOnlyZeroOne(i_Str))
-            {
-                return !v_InputIsValid;
-            }
-
-            return v_InputIsValid;
+            return (isInputLenValid(i_Str) && isInputContainOnlyZeroOne(i_Str));
         }
       
         private static bool isInputLenValid(string i_Str)
@@ -271,16 +268,16 @@ namespace B20_Ex01_1
         
         private static bool isInputContainOnlyZeroOne(string i_Str)
         {
-            const bool v_InputContainsOnlyOnesZeros = true;
+            bool inputContainOnlyZeroOne = true;
 
-            for(int i = 0; i < i_Str.Length; i++)
+            for(int i = 0; i < i_Str.Length && inputContainOnlyZeroOne; i++)
             {
                 if(i_Str[i] != '0' && i_Str[i] != '1')
                 {
-                    return !v_InputContainsOnlyOnesZeros;
+                    inputContainOnlyZeroOne = false;
                 }
             }
-            return v_InputContainsOnlyOnesZeros;
+            return inputContainOnlyZeroOne;
         }
     }
 }
