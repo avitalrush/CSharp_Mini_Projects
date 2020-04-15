@@ -6,6 +6,8 @@ namespace B20_Ex01_1
     {
         private const int k_NumOfNumbers = 3;
         private const int k_LenOfInput = 9;
+        private const bool v_InputLenIsValid = true;              // move that to the methods themselves, because this is relevant only to specific function
+        private const bool v_InputContainsOnlyOnesZeros = true;   // move that to the methods themselves, because this is relevant only to specific function
 
         public static void Main()
         {
@@ -29,9 +31,9 @@ namespace B20_Ex01_1
             string inputStr3 = getValidInput();
             int inputNum3 = int.Parse(inputStr3);
 
-            int decInput1 = convertToDec(inputStr1); // SHAKED writes convertToDec(string s) method
-            int decInput2 = convertToDec(inputStr2);
-            int decInput3 = convertToDec(inputStr3);
+            int decInput1 = convertFromBinaryToDecimal(inputStr1); // Shaked DONE /// /// SHAKED writes convertToDec(string s) method 
+            int decInput2 = convertFromBinaryToDecimal(inputStr2);
+            int decInput3 = convertFromBinaryToDecimal(inputStr3);
 
             printStatisticsOfInput(decInput1, decInput2, decInput3, inputStr1, inputStr2, inputStr3);
             Console.ReadLine();
@@ -45,7 +47,7 @@ namespace B20_Ex01_1
             do
             {
                 inputStr = getInput();
-                isValidInput = checkIfValidInput(inputStr); // SHAKED writes checkIfValidInput(string s) method
+                isValidInput = checkIfValidInput(inputStr); // Shaked DONE /// /// SHAKED writes checkIfValidInput(string s) method
             }
             while(isValidInput == !true);
             return inputStr;
@@ -209,39 +211,38 @@ namespace B20_Ex01_1
             Console.WriteLine("The Min num is {0}", min);
         }
 
-        ////////////////////////////////////////////////////////////////////
-        
-        static int convertToDec(string i_stringInput)
+       private static int convertToDec(string i_Str)
         {
-            int m_decimalNum = 0;
-            for (int i = 0; i <= (i_stringInput.Length) - 1; i++)
+            int decimalNum = 0;
+            for (int i = 0; i <= (i_Str.Length) - 1; i++)
             {
-                m_decimalNum *= 2;
-                m_decimalNum += (int)(i_stringInput[i] - '0');
+                decimalNum *= 2;
+                decimalNum += (int)(i_Str[i] - '0');
             }
-            return m_decimalNum;
+            return decimalNum;
         }
-
-        static bool checkIfValidInput(string i_stringInput)
+      
+        private static bool checkIfValidInput(string i_Str)
         {
-            if (isLen9(i_stringInput) != true)
-                return !true;
-            if (isTheNumberContainOnlyZeroOne(i_stringInput) != true)
+            if (isInputLenValid(i_Str) != v_InputLenIsValid)
+                return !v_InputLenIsValid;
+            if (isInputContainOnlyZeroOne(i_Str) != true)
                 return !true;
             return true;     // base case - so input is valid (if no method returned false)
         }
-
-        static bool isLen9(string i_stringInput)
+      
+        private static bool isInputLenValid(string i_Str)
         {
-            return (i_stringInput.Length == 9);
+            return (i_Str.Length == k_LenOfInput);
         }
+      
 
-        static bool isTheNumberContainOnlyZeroOne(string i_stringInput)
+        private static bool isInputContainOnlyZeroOne(string i_Str)
         {
-            for (int i = 0; i < i_stringInput.Length; i++)
-                if (i_stringInput[i] !='0' && i_stringInput[i] !='1')
-                   return !true;
-            return true;
+            for (int i = 0; i < i_Str.Length; i++)
+                if (i_Str[i] !='0' && i_Str[i] !='1')
+                   return !v_InputContainsOnlyOnesZeros;
+            return v_InputContainsOnlyOnesZeros;
         }
     }
 }
