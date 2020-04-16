@@ -132,7 +132,7 @@ namespace B20_Ex01_4
             {
                 stringIsPalindrome = true;
             }
-            else if (i_Str[0] != i_Str[strLen-1])
+            else if (i_Str[0] != i_Str[strLen - 1]) 
             {
                 stringIsPalindrome = false;
             }
@@ -165,9 +165,9 @@ namespace B20_Ex01_4
         {
             int upperCount = 0;
 
-            for(int i = 0; i <= k_LenOfInput-1; i++)
+            for (int i = 0; i <= k_LenOfInput - 1; i++) 
             {
-                if(char.IsUpper(i_Str[i]))
+                if (char.IsUpper(i_Str[i]))
                 {
                     upperCount++;
                 }
