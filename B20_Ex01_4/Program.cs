@@ -143,9 +143,6 @@ namespace B20_Ex01_4
         private static bool isDigitString(string i_Str)
         {
             return (char.IsDigit(i_Str[0]));
-
-            // it’s enough to check only the first char of the string
-            // because we already know it’s a valid string and all the other chars will be of the same type
         }
 
         private static bool isDividedByFive(string i_Str)
@@ -158,9 +155,6 @@ namespace B20_Ex01_4
         private static bool isLetterString(string i_Str)
         {
             return (char.IsLetter(i_Str[0]));
-            
-            // it’s enough to check only the first char of the string
-            // because we already know it’s a valid string and all the other chars will be of the same type
         }
 
         private static int countUpperCaseLetters(string i_Str)
