@@ -35,7 +35,7 @@ namespace B20_Ex01_4
                 isInputValid = validateInput(inputStr);
                 if (!isInputValid)
                 {
-                    Console.WriteLine("Not a valid input. Please enter 8-char string, with only digits or english letters:");
+                    Console.WriteLine("Not a valid input. Please enter 8-char string, with only digits or english letters: ");
                 }
             }
             while (!isInputValid);

@@ -19,15 +19,15 @@ namespace B20_Ex01_1
 
             Console.WriteLine("Please enter " + k_NumOfNumbers + " " + k_LenOfInput + "-digits binary numbers.");
 
-            Console.WriteLine("Please enter the first number:");
+            Console.WriteLine("Please enter the first number: ");
             inputStr1 = getValidInput();
             inputNum1 = int.Parse(inputStr1);
 
-            Console.WriteLine("Please enter the second number:");
+            Console.WriteLine("Please enter the second number: ");
             inputStr2 = getValidInput();
             inputNum2 = int.Parse(inputStr2);
 
-            Console.WriteLine("Please enter the third number:");
+            Console.WriteLine("Please enter the third number: ");
             inputStr3 = getValidInput();
             inputNum3 = int.Parse(inputStr3);
 
@@ -51,7 +51,7 @@ namespace B20_Ex01_1
                 isValidInput = checkIfValidInput(inputStr);
                 if(!isValidInput)
                 {
-                    Console.WriteLine("Not valid input. Please enter a valid input:");
+                    Console.WriteLine("Not valid input. Please enter a valid input: ");
                 }
             }
             while (isValidInput == !true);
