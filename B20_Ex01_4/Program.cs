@@ -36,7 +36,7 @@ namespace B20_Ex01_4
                     Console.WriteLine("Not valid input. Please enter a valid input:");
                 }
             }
-            while (isInputValid == !true);
+            while (!isInputValid);
 
             return inputStr;
         }
@@ -50,7 +50,7 @@ namespace B20_Ex01_4
 
         private static bool validateInput(string i_Str)
         {
-            return (isInputLenValid(i_Str) && isInputSameChars(i_Str));
+            return (isInputLenValid(i_Str) && isInputContainsSameCharsType(i_Str));
         }
 
         private static bool isInputLenValid(string i_Str)
@@ -58,35 +58,39 @@ namespace B20_Ex01_4
             return (i_Str.Length == k_LenOfInput);
         }
 
-        private static bool isInputSameChars(string i_Str)
+        private static bool isInputContainsSameCharsType(string i_Str)
         {
             return (isInputContainsOnlyLetters(i_Str) || isInputContainsOnlyDigits(i_Str));
         }
 
         private static bool isInputContainsOnlyLetters(string i_Str)
         {
-            bool isInputConsistentWithLetters = true;
+            bool typeOfCharsInInputIsOnlyLetters = true;
 
-            for(int i = 0; i < i_Str.Length; i++)
+            for(int i = 0; i < i_Str.Length && typeOfCharsInInputIsOnlyLetters; i++)
             {
-                if(!(char.IsLetter(i_Str[i]))) // if the char is a English letter
-                    isInputConsistentWithLetters = !true;
+                if(!(char.IsLetter(i_Str[i])))
+                {
+                    typeOfCharsInInputIsOnlyLetters = false;
+                }
             }
 
-            return isInputConsistentWithLetters;
+            return typeOfCharsInInputIsOnlyLetters;
         }
 
         private static bool isInputContainsOnlyDigits(string i_Str)
         {
-            bool isInputConsistentWithDigits = true;
+            bool typeOfCharsInInputIsOnlyDigits = true;
 
-            for (int i = 0; i < i_Str.Length; i++)
+            for (int i = 0; i < i_Str.Length && typeOfCharsInInputIsOnlyDigits; i++)
             {
-                if (!(char.IsDigit(i_Str[i]))) // if the char is a English letter
-                    isInputConsistentWithDigits = !true;
+                if(!(char.IsDigit(i_Str[i])))
+                {
+                    typeOfCharsInInputIsOnlyDigits = false;
+                }
             }
-
-            return isInputConsistentWithDigits;
+            
+            return typeOfCharsInInputIsOnlyDigits;
         }
 
         private static void analyzeInputString(string i_Str)
