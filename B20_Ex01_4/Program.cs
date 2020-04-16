@@ -10,18 +10,91 @@ namespace B20_Ex01_4
 
         public static void Main()
         {
+            start();
+        }
+
+        private static void start()
+        {
             string inputStr;
 
             Console.WriteLine("Please enter 8-char string, with only digits or english letters: ");
-            inputStr = Console.ReadLine();
-            analyzeInputString(inputStr);
+            inputStr = getValidInput();
+
+            //analyze input depend on type: letters or numbers
 
             Console.ReadLine();
         }
 
+        private static string getValidInput()
+        {
+            string inputStr;
+            bool isInputValid;
+
+            do
+            {
+                inputStr = getInput();
+                isInputValid = validateInput(inputStr);
+                if (!isInputValid)
+                {
+                    Console.WriteLine("Not valid input. Please enter a valid input:");
+                }
+            }
+            while (isInputValid == !true);
+
+            return inputStr;
+        }
+
+        private static string getInput()
+        {
+            string inputStr = Console.ReadLine();
+
+            return inputStr;
+        }
+
+        private static bool validateInput(string i_Str)
+        {
+            return (isInputLenValid(i_Str) && isInputSameChars(i_Str));
+        }
+
+        private static bool isInputLenValid(string i_Str)
+        {
+            return (i_Str.Length == k_LenOfInput);
+        }
+
+        private static bool isInputSameChars(string i_Str)
+        {
+            return (isInputContainsOnlyLetters(i_Str) || isInputContainsOnlyDigits(i_Str));
+        }
+
+        private static bool isInputContainsOnlyLetters(string i_Str)
+        {
+            bool isInputConsistentWithLetters = true;
+
+            for(int i = 0; i < i_Str.Length; i++)
+            {
+                if(!(char.IsLetter(i_Str[i]))) // if the char is a English letter
+                    isInputConsistentWithLetters = false;
+            }
+
+            return isInputConsistentWithLetters;
+        }
+
+        private static bool isInputContainsOnlyDigits(string i_Str)
+        {
+            bool isInputConsistentWithDigits = true;
+
+            for (int i = 0; i < i_Str.Length; i++)
+            {
+                if (!(char.IsDigit(i_Str[i]))) // if the char is a English letter
+                    isInputConsistentWithDigits = false;
+            }
+
+            return isInputConsistentWithDigits;
+        }
+
         private static void analyzeInputString(string i_Str)
         {
-            if(isPalindrome(i_Str))
+            if (isPalindrome(i_Str))
             {
                 Console.WriteLine("{0} is a Palindrome", i_Str);
             }
@@ -54,7 +127,7 @@ namespace B20_Ex01_4
                 bool stringIsPalindrome;
                 int strLen = i_Str.Length;
 
-                if(strLen == 1 || strLen == 0)
+                if (strLen == 1 || strLen == 0)
                 {
                     stringIsPalindrome = true;
                 }
@@ -78,11 +151,11 @@ namespace B20_Ex01_4
             // because we already know it’s a valid string and all the other chars will be of the same type
         }
 
-        private static int findCharType(char i_char)
+        private static int findCharType(char i_Char)
         {
             int typeOfChar;
-
-            if(char.IsLetter(i_char)) // if the char is a English letter
+            
+            if (char.IsLetter(i_Char)) // if the char is a English letter
             {
                 typeOfChar = LETTER;
             }
