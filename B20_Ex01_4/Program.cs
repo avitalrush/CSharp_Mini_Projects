@@ -65,32 +65,32 @@ namespace B20_Ex01_4
 
         private static bool isInputContainsOnlyLetters(string i_Str)
         {
-            bool typeOfCharsInInputIsOnlyLetters = true;
+            bool stringContainsOnlyLetters = true;
 
-            for(int i = 0; i < i_Str.Length && typeOfCharsInInputIsOnlyLetters; i++)
+            for(int i = 0; i < i_Str.Length && stringContainsOnlyLetters; i++)
             {
                 if(!(char.IsLetter(i_Str[i])))
                 {
-                    typeOfCharsInInputIsOnlyLetters = false;
+                    stringContainsOnlyLetters = false;
                 }
             }
 
-            return typeOfCharsInInputIsOnlyLetters;
+            return stringContainsOnlyLetters;
         }
 
         private static bool isInputContainsOnlyDigits(string i_Str)
         {
-            bool typeOfCharsInInputIsOnlyDigits = true;
+            bool stringContainsOnlyDigits = true;
 
-            for (int i = 0; i < i_Str.Length && typeOfCharsInInputIsOnlyDigits; i++)
+            for (int i = 0; i < i_Str.Length && stringContainsOnlyDigits; i++)
             {
                 if(!(char.IsDigit(i_Str[i])))
                 {
-                    typeOfCharsInInputIsOnlyDigits = false;
+                    stringContainsOnlyDigits = false;
                 }
             }
             
-            return typeOfCharsInInputIsOnlyDigits;
+            return stringContainsOnlyDigits;
         }
 
         private static void analyzeInputString(string i_Str)
@@ -116,7 +116,7 @@ namespace B20_Ex01_4
                 }
             }
 
-            if (isLetterString(i_Str))
+            else if (isLetterString(i_Str))
             {
                 int count = countUpperCaseLetters(i_Str);
                 Console.WriteLine("There are {0} uppercase letters in {1}", count, i_Str);
