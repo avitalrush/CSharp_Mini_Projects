@@ -5,8 +5,6 @@ namespace B20_Ex01_4
     public class Program
     {
         private const int k_LenOfInput = 8;
-        private const int DIGIT = 0;
-        private const int LETTER = 1;
 
         public static void Main()
         {
@@ -19,8 +17,7 @@ namespace B20_Ex01_4
 
             Console.WriteLine("Please enter 8-char string, with only digits or english letters: ");
             inputStr = getValidInput();
-
-            //analyze input depend on type: letters or numbers
+            analyzeInputString(inputStr);
 
             Console.ReadLine();
         }
@@ -73,7 +70,7 @@ namespace B20_Ex01_4
             for(int i = 0; i < i_Str.Length; i++)
             {
                 if(!(char.IsLetter(i_Str[i]))) // if the char is a English letter
-                    isInputConsistentWithLetters = false;
+                    isInputConsistentWithLetters = !true;
             }
 
             return isInputConsistentWithLetters;
@@ -86,7 +83,7 @@ namespace B20_Ex01_4
             for (int i = 0; i < i_Str.Length; i++)
             {
                 if (!(char.IsDigit(i_Str[i]))) // if the char is a English letter
-                    isInputConsistentWithDigits = false;
+                    isInputConsistentWithDigits = !true;
             }
 
             return isInputConsistentWithDigits;
@@ -107,7 +104,7 @@ namespace B20_Ex01_4
             {
                 if (isDividedByFive(i_Str))
                 {
-                    Console.WriteLine("{0} is  divided by 5", i_Str);
+                    Console.WriteLine("{0} is divided by 5", i_Str);
                 }
                 else
                 {
@@ -124,47 +121,31 @@ namespace B20_Ex01_4
 
         private static bool isPalindrome(string i_Str)
         {
-                bool stringIsPalindrome;
-                int strLen = i_Str.Length;
+            bool stringIsPalindrome;
+            int strLen = i_Str.Length;
 
-                if (strLen == 1 || strLen == 0)
-                {
-                    stringIsPalindrome = true;
-                }
-                else if (i_Str[0] != i_Str[strLen-1])
-                {
-                    stringIsPalindrome = false;
-                }
-                else
-                {
-                    stringIsPalindrome = isPalindrome(i_Str.Substring(1,strLen-2));
-                }
+            if (strLen == 1 || strLen == 0)
+            {
+                stringIsPalindrome = true;
+            }
+            else if (i_Str[0] != i_Str[strLen-1])
+            {
+                stringIsPalindrome = false;
+            }
+            else
+            {
+                stringIsPalindrome = isPalindrome(i_Str.Substring(1,strLen-2));
+            }
 
-                return stringIsPalindrome;
+            return stringIsPalindrome;
         }
 
         private static bool isDigitString(string i_Str)
         {
-            return (findCharType(i_Str[0]) == DIGIT);
+            return (char.IsDigit(i_Str[0]));
 
             // it’s enough to check only the first char of the string
             // because we already know it’s a valid string and all the other chars will be of the same type
-        }
-
-        private static int findCharType(char i_Char)
-        {
-            int typeOfChar;
-            
-            if (char.IsLetter(i_Char)) // if the char is a English letter
-            {
-                typeOfChar = LETTER;
-            }
-            else
-            {
-                typeOfChar = DIGIT;   // because it can be either letter or digit, only 2 options
-            }
-
-            return typeOfChar;
         }
 
         private static bool isDividedByFive(string i_Str)
@@ -176,8 +157,8 @@ namespace B20_Ex01_4
 
         private static bool isLetterString(string i_Str)
         {
-            return (findCharType(i_Str[0]) == LETTER);
-
+            return (char.IsLetter(i_Str[0]));
+            
             // it’s enough to check only the first char of the string
             // because we already know it’s a valid string and all the other chars will be of the same type
         }
