@@ -49,7 +49,8 @@ namespace B20_Ex01_1
             {
                 inputStr = getInput();
                 isValidInput = checkIfValidInput(inputStr);
-                if(!isValidInput)
+
+                if (!isValidInput)
                 {
                     Console.WriteLine("Not valid input. Please enter a valid input:");
                 }
