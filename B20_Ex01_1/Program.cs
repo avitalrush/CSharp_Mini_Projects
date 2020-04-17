@@ -251,14 +251,15 @@ namespace B20_Ex01_1
         private static int convertFromBinaryToDecimal(string i_Str)
         {
             int decimalNum = 0;
+            int decimalSum = 0;
 
             for (int i = 0; i <= (i_Str.Length) - 1; i++)
             {
-                decimalNum *= 2;
-                decimalNum += (int)(i_Str[i] - '0');
+                decimalNum = int.Parse(i_Str[(i_Str.Length) - 1 - i].ToString());
+                decimalSum += decimalNum*(int)Math.Pow(2,i);
             }
 
-            return decimalNum;
+            return decimalSum;
         }
 
         private static bool checkIfValidInput(string i_Str)
