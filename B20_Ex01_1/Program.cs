@@ -14,22 +14,19 @@ namespace B20_Ex01_1
 
         private static void start()
         {
-            int inputNum1, inputNum2, inputNum3, decInput1, decInput2, decInput3;
+            int decInput1, decInput2, decInput3;
             string inputStr1, inputStr2, inputStr3;
 
             Console.WriteLine("Please enter " + k_NumOfNumbers + " " + k_LenOfInput + "-digits binary numbers.");
 
             Console.WriteLine("Please enter the first number: ");
             inputStr1 = getValidInput();
-            inputNum1 = int.Parse(inputStr1);
 
             Console.WriteLine("Please enter the second number: ");
             inputStr2 = getValidInput();
-            inputNum2 = int.Parse(inputStr2);
 
             Console.WriteLine("Please enter the third number: ");
             inputStr3 = getValidInput();
-            inputNum3 = int.Parse(inputStr3);
 
             decInput1 = convertFromBinaryToDecimal(inputStr1);
             decInput2 = convertFromBinaryToDecimal(inputStr2);
@@ -248,18 +245,36 @@ namespace B20_Ex01_1
             Console.WriteLine("The Min num is {0}", min);
         }
 
+        private static int convertFromCharToInt(char i_Chr)
+        {
+            return i_Chr - '0';
+        }
+
         private static int convertFromBinaryToDecimal(string i_Str)
         {
-            int decimalNum = 0;
-            int decimalSum = 0;
+            int currentBinaryDigit;
+            int decimalNumber = 0;
+            int mostRightIndex = i_Str.Length - 1;
+            int powerByIndex;
 
-            for (int i = 0; i <= (i_Str.Length) - 1; i++)
+            for (int i = mostRightIndex; i >= 0; i--)
             {
-                decimalNum = int.Parse(i_Str[(i_Str.Length) - 1 - i].ToString());
-                decimalSum += decimalNum*(int)Math.Pow(2,i);
+                currentBinaryDigit = convertFromCharToInt(i_Str[i]);
+                powerByIndex = getPowerByIndex(i_Str, i);
+                decimalNumber += multiplyDigitByTwoPower(currentBinaryDigit, powerByIndex);
             }
 
-            return decimalSum;
+            return decimalNumber;
+        }
+
+        private static int getPowerByIndex(string i_Str, int i_CurrentIndex)
+        {
+            return (i_Str.Length - i_CurrentIndex - 1);
+        }
+
+        private static int multiplyDigitByTwoPower(int i_BinaryDigit, int i_PowerByIndex)
+        {
+            return i_BinaryDigit * (int)Math.Pow(2, i_PowerByIndex);
         }
 
         private static bool checkIfValidInput(string i_Str)
