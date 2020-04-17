@@ -83,13 +83,13 @@ namespace B20_Ex01_5
 
         private static void biggestDigit(string i_Str)
         {
-            int bigDigit = i_Str[0] - '0';
+            int bigDigit = int.Parse(i_Str[0].ToString());
 
             for (int i = 1; i < i_Str.Length; i++)
             {
-                if ((i_Str[i] - '0') > bigDigit)
+                if (int.Parse(i_Str[i].ToString()) > bigDigit)
                 {
-                    bigDigit = i_Str[i] - '0';
+                    bigDigit = int.Parse(i_Str[i].ToString());
                 }
             }
 
@@ -98,13 +98,13 @@ namespace B20_Ex01_5
 
         private static void smallestDigit(string i_Str)
         {
-            int smallDigit = i_Str[0] - '0';
+            int smallDigit = int.Parse(i_Str[0].ToString());
 
             for (int i = 1; i < i_Str.Length; i++)
             {
-                if ((i_Str[i] - '0') < smallDigit)
+                if (int.Parse(i_Str[i].ToString()) < smallDigit)
                 {
-                    smallDigit = i_Str[i] - '0';
+                    smallDigit = int.Parse(i_Str[i].ToString());
                 }
             }
 
@@ -117,7 +117,7 @@ namespace B20_Ex01_5
 
             for (int i = 0; i < i_Str.Length; i++)
             {
-                if ((i_Str[i] - '0') % 3 == 0)
+                if (int.Parse(i_Str[i].ToString()) % 3 == 0)
                 {
                     counterOfHowManyDigitsDivideByThree++;
                 }
@@ -130,11 +130,11 @@ namespace B20_Ex01_5
         {
             int counterOfDigitsBiggerThanUnitsDigit = 0;
 
-            int unitsDigit = i_Str[i_Str.Length - 1] - '0';
+            int unitsDigit = int.Parse(i_Str[i_Str.Length - 1].ToString());
 
             for (int i = 0; i < i_Str.Length - 1; i++)
             {
-                if ((i_Str[i] - '0') > unitsDigit)
+                if (int.Parse(i_Str[i].ToString()) > unitsDigit)
                 {
                     counterOfDigitsBiggerThanUnitsDigit++;
                 }
