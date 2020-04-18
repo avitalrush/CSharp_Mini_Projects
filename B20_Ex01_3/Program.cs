@@ -15,7 +15,7 @@ namespace B20_Ex01_3
         {
             int inputHeight;
 
-            Console.WriteLine("Please enter the height for the hour-glass: ");
+            Console.WriteLine("Please enter the height for the hour glass: ");
             inputHeight = getValidHeight();
             printStarsHourglass(inputHeight);
 
@@ -33,7 +33,7 @@ namespace B20_Ex01_3
                 inputHeightNum = validateHeightInput(inputHeightStr);
                 if (!s_IsHeightValid)
                 {
-                    Console.WriteLine("Not a valid input. Please enter a valid number for the hour-glass height: ");
+                    Console.WriteLine("Not a valid input. Please enter a valid number for the hour glass height: ");
                 }
             }
             while (!s_IsHeightValid);
