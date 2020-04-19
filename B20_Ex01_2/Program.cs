@@ -28,7 +28,7 @@ namespace B20_Ex01_2
                 return;
             }
 
-            printSpacesStars(numOfSpacesToPrint, numOfStarsToPrint);    // PRINT LINE OF SPACES AND STARS
+            PrintSpacesStars(numOfSpacesToPrint, numOfStarsToPrint);    // PRINT LINE OF SPACES AND STARS
 
             // PREPARE THE PARAMETERS FOR THE NEXT REC CALL
 
@@ -49,7 +49,7 @@ namespace B20_Ex01_2
                 }
             }
 
-            printStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars, i_IsAscending);    // REC CALL
+            PrintStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars, i_IsAscending);    // REC CALL
 
             /*
 
