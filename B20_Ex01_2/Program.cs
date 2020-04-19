@@ -6,7 +6,7 @@ namespace B20_Ex01_2
     {
         public static void Main()
         {
-            printStarsHourglass(5);
+            PrintStarsHourglass(5);
         }
 
         public static void PrintStarsHourglass(int i_OriginNumOfStars)
