@@ -14,22 +14,19 @@ namespace B20_Ex01_1
 
         private static void start()
         {
-            int inputNum1, inputNum2, inputNum3, decInput1, decInput2, decInput3;
+            int decInput1, decInput2, decInput3;
             string inputStr1, inputStr2, inputStr3;
 
             Console.WriteLine("Please enter " + k_NumOfNumbers + " " + k_LenOfInput + "-digits binary numbers.");
 
             Console.WriteLine("Please enter the first number: ");
             inputStr1 = getValidInput();
-            inputNum1 = int.Parse(inputStr1);
 
             Console.WriteLine("Please enter the second number: ");
             inputStr2 = getValidInput();
-            inputNum2 = int.Parse(inputStr2);
 
             Console.WriteLine("Please enter the third number: ");
             inputStr3 = getValidInput();
-            inputNum3 = int.Parse(inputStr3);
 
             decInput1 = convertFromBinaryToDecimal(inputStr1);
             decInput2 = convertFromBinaryToDecimal(inputStr2);
@@ -192,7 +189,7 @@ namespace B20_Ex01_1
                 i_Num /= 2;
             }
 
-            return (i_Num == 1);
+            return i_Num == 1;
         }
 
         private static void printHowManyAreAscOrder(string i_Str1, string i_Str2, string i_Str3)
@@ -248,28 +245,47 @@ namespace B20_Ex01_1
             Console.WriteLine("The Min num is {0}", min);
         }
 
+        private static int convertFromCharToInt(char i_Chr)
+        {
+            return i_Chr - '0';
+        }
+
         private static int convertFromBinaryToDecimal(string i_Str)
         {
-            int decimalNum = 0;
-            int decimalSum = 0;
+            int currentBinaryDigit;
+            int decimalNumber = 0;
+            int mostRightIndex = i_Str.Length - 1;
+            int powerByIndex;
 
-            for (int i = 0; i <= (i_Str.Length) - 1; i++)
+            for (int indexInStr = mostRightIndex; indexInStr >= 0; indexInStr--)
             {
-                decimalNum = int.Parse(i_Str[(i_Str.Length) - 1 - i].ToString());
-                decimalSum += decimalNum*(int)Math.Pow(2,i);
+                currentBinaryDigit = convertFromCharToInt(i_Str[indexInStr]);
+                powerByIndex = getPowerByIndex(i_Str, indexInStr);
+                decimalNumber += multiplyDigitByTwoPower(currentBinaryDigit, powerByIndex);
             }
 
-            return decimalSum;
+            return decimalNumber;
+        }
+
+        private static int getPowerByIndex(string i_Str, int i_IndexInStr)
+        {
+            return i_Str.Length - i_IndexInStr - 1;
+        }
+
+        private static int multiplyDigitByTwoPower(int i_BinaryDigit, int i_PowerByIndex)
+        {
+            int powerOfTwoByIndex = (int)Math.Pow(2, i_PowerByIndex);
+            return i_BinaryDigit * powerOfTwoByIndex;
         }
 
         private static bool checkIfValidInput(string i_Str)
         {
-            return (isInputLenValid(i_Str) && isInputContainOnlyZeroOne(i_Str));
+            return isInputLenValid(i_Str) && isInputContainOnlyZeroOne(i_Str);
         }
 
         private static bool isInputLenValid(string i_Str)
         {
-            return (i_Str.Length == k_LenOfInput);
+            return i_Str.Length == k_LenOfInput;
         }
 
         private static bool isInputContainOnlyZeroOne(string i_Str)
@@ -283,6 +299,7 @@ namespace B20_Ex01_1
                     inputContainOnlyZeroOne = false;
                 }
             }
+
             return inputContainOnlyZeroOne;
         }
     }

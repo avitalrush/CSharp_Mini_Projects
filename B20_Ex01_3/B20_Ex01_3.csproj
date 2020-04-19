@@ -35,6 +35,9 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="B20_Ex01_2">
+      <HintPath>..\B20_Ex01_2\bin\Debug\B20_Ex01_2.exe</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
