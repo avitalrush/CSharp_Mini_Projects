@@ -189,7 +189,7 @@ namespace B20_Ex01_1
                 i_Num /= 2;
             }
 
-            return (i_Num == 1);
+            return i_Num == 1;
         }
 
         private static void printHowManyAreAscOrder(string i_Str1, string i_Str2, string i_Str3)
@@ -257,34 +257,35 @@ namespace B20_Ex01_1
             int mostRightIndex = i_Str.Length - 1;
             int powerByIndex;
 
-            for (int i = mostRightIndex; i >= 0; i--)
+            for (int indexInStr = mostRightIndex; indexInStr >= 0; indexInStr--)
             {
-                currentBinaryDigit = convertFromCharToInt(i_Str[i]);
-                powerByIndex = getPowerByIndex(i_Str, i);
+                currentBinaryDigit = convertFromCharToInt(i_Str[indexInStr]);
+                powerByIndex = getPowerByIndex(i_Str, indexInStr);
                 decimalNumber += multiplyDigitByTwoPower(currentBinaryDigit, powerByIndex);
             }
 
             return decimalNumber;
         }
 
-        private static int getPowerByIndex(string i_Str, int i_CurrentIndex)
+        private static int getPowerByIndex(string i_Str, int i_IndexInStr)
         {
-            return (i_Str.Length - i_CurrentIndex - 1);
+            return i_Str.Length - i_IndexInStr - 1;
         }
 
         private static int multiplyDigitByTwoPower(int i_BinaryDigit, int i_PowerByIndex)
         {
-            return i_BinaryDigit * (int)Math.Pow(2, i_PowerByIndex);
+            int powerOfTwoByIndex = (int)Math.Pow(2, i_PowerByIndex);
+            return i_BinaryDigit * powerOfTwoByIndex;
         }
 
         private static bool checkIfValidInput(string i_Str)
         {
-            return (isInputLenValid(i_Str) && isInputContainOnlyZeroOne(i_Str));
+            return isInputLenValid(i_Str) && isInputContainOnlyZeroOne(i_Str);
         }
 
         private static bool isInputLenValid(string i_Str)
         {
-            return (i_Str.Length == k_LenOfInput);
+            return i_Str.Length == k_LenOfInput;
         }
 
         private static bool isInputContainOnlyZeroOne(string i_Str)
