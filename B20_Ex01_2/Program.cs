@@ -6,7 +6,7 @@ namespace B20_Ex01_2
     {
         public static void Main()
         {
-            PrintStarsHourglass(5);    
+            printStarsHourglass(5);
         }
 
         public static void PrintStarsHourglass(int i_OriginNumOfStars)
@@ -21,30 +21,73 @@ namespace B20_Ex01_2
             int numOfSpacesToPrint = (i_OriginNumOfStars - i_CurrentNumOfStars) / 2;
             int numOfStarsToPrint = i_CurrentNumOfStars;
 
+            ///////// VERSION 1: 1 return call /////////
+
+            if (i_CurrentNumOfStars > i_OriginNumOfStars)
+            {
+                return;
+            }
+
+            printSpacesStars(numOfSpacesToPrint, numOfStarsToPrint);    // PRINT LINE OF SPACES AND STARS
+
+            // PREPARE THE PARAMETERS FOR THE NEXT REC CALL
+
             if (i_CurrentNumOfStars == 1)
             {
-                PrintSpacesStars(numOfSpacesToPrint, numOfStarsToPrint);
+                i_CurrentNumOfStars += 2;
                 i_IsAscending = true;
-                PrintStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars + 2, i_IsAscending);    // REC CALL
             }
-            else if(i_CurrentNumOfStars == i_OriginNumOfStars && i_IsAscending)
+            else
             {
-                PrintSpacesStars(numOfSpacesToPrint, numOfStarsToPrint);
+                if(!i_IsAscending)
+                {
+                    i_CurrentNumOfStars -= 2;
+                }
+                else
+                {
+                    i_CurrentNumOfStars += 2;
+                }
+            }
+
+            printStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars, i_IsAscending);    // REC CALL
+
+            /*
+
+            ///////// VERSION 2: 2 return calls && repetitive checking if i_CurrentNumOfStars == i_OriginNumOfStars  /////////
+
+            printSpacesStars(numOfSpacesToPrint, numOfStarsToPrint);    // PRINT LINE OF SPACES AND STARS
+
+            // PREPARE THE PARAMETERS FOR THE NEXT REC CALL
+                if (i_CurrentNumOfStars == 1)
+            {
+                if(i_OriginNumOfStars == 1)
+                {
+                    return;
+                }
+                else
+                {
+                    i_IsAscending = true;
+                    i_CurrentNumOfStars += 2;
+                }
+            }
+            else if (i_CurrentNumOfStars == i_OriginNumOfStars && i_IsAscending)
+            {
                 return;
             }
             else
             {
-                PrintSpacesStars(numOfSpacesToPrint, numOfStarsToPrint);
-
                 if (i_IsAscending)
                 {
-                    PrintStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars + 2, i_IsAscending);    // REC CALL
+                    i_CurrentNumOfStars += 2;
                 }
                 else
                 {
-                    PrintStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars - 2, i_IsAscending); // REC CALL
+                    i_CurrentNumOfStars -= 2;
                 }
             }
+            printStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars, i_IsAscending);    // REC CALL
+
+            */
         }
 
         public static void PrintSpacesStars(int i_NumOfSpaces, int i_NumOfStars)
