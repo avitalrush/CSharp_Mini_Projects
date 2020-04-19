@@ -9,14 +9,14 @@ namespace B20_Ex01_2
             printStarsHourglass(5);
         }
 
-        private static void printStarsHourglass(int i_OriginNumOfStars)
+        public static void PrintStarsHourglass(int i_OriginNumOfStars)
         {
             bool isAscending = false;
 
-            printStarsHourglassRec(i_OriginNumOfStars, i_OriginNumOfStars, isAscending);
+            PrintStarsHourglassRec(i_OriginNumOfStars, i_OriginNumOfStars, isAscending);
         }
 
-        private static void printStarsHourglassRec(int i_OriginNumOfStars, int i_CurrentNumOfStars, bool i_IsAscending)
+        public static void PrintStarsHourglassRec(int i_OriginNumOfStars, int i_CurrentNumOfStars, bool i_IsAscending)
         {
             int numOfSpacesToPrint = (i_OriginNumOfStars - i_CurrentNumOfStars) / 2;
             int numOfStarsToPrint = i_CurrentNumOfStars;
@@ -90,7 +90,7 @@ namespace B20_Ex01_2
             */
         }
 
-        private static void printSpacesStars(int i_NumOfSpaces, int i_NumOfStars)
+        public static void PrintSpacesStars(int i_NumOfSpaces, int i_NumOfStars)
         {
             System.Text.StringBuilder lineToPrint = new System.Text.StringBuilder();
 
