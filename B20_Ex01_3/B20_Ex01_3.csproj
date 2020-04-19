@@ -35,10 +35,13 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="B20_Ex01_2">
-      <HintPath>..\B20_Ex01_2\bin\Debug\B20_Ex01_2.exe</HintPath>
-    </Reference>
     <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\B20_Ex01_2\B20_Ex01_2.csproj">
+      <Project>{5effe386-e257-478c-a9cb-b2d6e60e1ec0}</Project>
+      <Name>B20_Ex01_2</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

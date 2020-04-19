@@ -53,7 +53,7 @@ namespace B20_Ex01_3
             int inputHeightNum;
 
             s_IsHeightValid = int.TryParse(i_InputHeightStr, out inputHeightNum);
-            if(s_IsHeightValid)
+            if (s_IsHeightValid)
             {
                 inputHeightNum = checkHeightParity(inputHeightNum);
             }
