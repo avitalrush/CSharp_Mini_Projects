@@ -17,7 +17,7 @@ namespace B20_Ex01_3
 
             Console.WriteLine("Please enter the height for the hour glass: ");
             inputHeight = getValidHeight();
-            printStarsHourglass(inputHeight);
+            B20_Ex01_2.Program.PrintStarsHourglass(inputHeight);
 
             Console.ReadLine();
         }
@@ -69,54 +69,6 @@ namespace B20_Ex01_3
             }
 
             return i_InputHeightNum;
-        }
-
-        private static void printStarsHourglass(int i_NumOfStars)  //MAATEFET
-        {
-            bool i_ExpendNumOfStars = false; // = down
-
-            printRec(i_NumOfStars, i_NumOfStars, i_ExpendNumOfStars);
-        }
-
-        private static void printRec(int i_InitNumOfStars, int i_CurrNumOfStars, bool i_ExpendNumOfStars)
-        {
-            if (i_CurrNumOfStars == 1)
-            {
-                printLine((i_InitNumOfStars - i_CurrNumOfStars) / 2, i_CurrNumOfStars);
-                i_ExpendNumOfStars = true; // =up
-                printRec(i_InitNumOfStars, i_CurrNumOfStars + 2, i_ExpendNumOfStars);
-            }
-            else if (i_CurrNumOfStars > i_InitNumOfStars && i_ExpendNumOfStars == true)
-            {
-                return;
-            }
-            else    // curr>1
-            {
-                printLine((i_InitNumOfStars - i_CurrNumOfStars) / 2, i_CurrNumOfStars);
-                if(i_ExpendNumOfStars == false)
-                {
-                    printRec(i_InitNumOfStars, i_CurrNumOfStars - 2, i_ExpendNumOfStars);
-                }
-                else
-                {
-                    printRec(i_InitNumOfStars, i_CurrNumOfStars + 2, i_ExpendNumOfStars);
-                }
-            }
-        }
-
-        private static void printLine(int i_NumOfSpaces, int i_NumOfStars)
-        {
-            for (int i = 1; i <= i_NumOfSpaces; i++)
-            {
-                Console.Write(" ");
-            }
-
-            for (int i = 1; i <= i_NumOfStars; i++)
-            {
-                Console.Write("*");
-            }
-
-            Console.WriteLine();
         }
     }
 }

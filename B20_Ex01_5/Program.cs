@@ -155,6 +155,5 @@ namespace B20_Ex01_5
 
             Console.WriteLine("In the input {0}, there are {1} digits bigger than the units digit", i_Str, countDigitsBiggerThanUnits);
         }
-
     }
 }

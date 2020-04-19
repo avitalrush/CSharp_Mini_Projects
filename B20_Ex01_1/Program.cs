@@ -298,6 +298,7 @@ namespace B20_Ex01_1
                     inputContainOnlyZeroOne = false;
                 }
             }
+
             return inputContainOnlyZeroOne;
         }
     }
