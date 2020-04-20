@@ -14,25 +14,25 @@ namespace B20_Ex01_1
 
         private static void start()
         {
-            int decInput1, decInput2, decInput3;
-            string inputStr1, inputStr2, inputStr3;
+            int inputInDecimal1, inputInDecimal2, inputInDecimal3;
+            string inputInBinary1, inputInBinary2, inputInBinary3;
 
             Console.WriteLine("Please enter " + k_NumOfNumbers + " " + k_LenOfInput + "-digits binary numbers.");
 
             Console.WriteLine("Please enter the first number: ");
-            inputStr1 = getValidInput();
+            inputInBinary1 = getValidInput();
 
             Console.WriteLine("Please enter the second number: ");
-            inputStr2 = getValidInput();
+            inputInBinary2 = getValidInput();
 
             Console.WriteLine("Please enter the third number: ");
-            inputStr3 = getValidInput();
+            inputInBinary3 = getValidInput();
 
-            decInput1 = convertFromBinaryToDecimal(inputStr1);
-            decInput2 = convertFromBinaryToDecimal(inputStr2);
-            decInput3 = convertFromBinaryToDecimal(inputStr3);
+            inputInDecimal1 = convertFromBinaryToDecimal(inputInBinary1);
+            inputInDecimal2 = convertFromBinaryToDecimal(inputInBinary2);
+            inputInDecimal3 = convertFromBinaryToDecimal(inputInBinary3);
 
-            printStatisticsOfInput(decInput1, decInput2, decInput3, inputStr1, inputStr2, inputStr3);
+            printStatisticsOfInput(inputInDecimal1, inputInDecimal2, inputInDecimal3, inputInBinary1, inputInBinary2, inputInBinary3);
 
             Console.ReadLine();
         }
