@@ -39,7 +39,7 @@ namespace B20_Ex01_2
             }
             else
             {
-                if(!i_IsAscending)
+                if (!i_IsAscending)
                 {
                     i_CurrentNumOfStars -= 2;
                 }
