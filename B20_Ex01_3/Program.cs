@@ -49,12 +49,12 @@ namespace B20_Ex01_3
             return inputHeightStr;
         }
 
-        private static int validateHeightInput(string i_InputHeightStr, ref bool o_IsHeightValid)
+        private static int validateHeightInput(string i_InputHeightStr, ref bool io_IsHeightValid)
         {
             int inputHeightNum;
 
-            o_IsHeightValid = int.TryParse(i_InputHeightStr, out inputHeightNum);
-            if (o_IsHeightValid)
+            io_IsHeightValid = int.TryParse(i_InputHeightStr, out inputHeightNum);
+            if (io_IsHeightValid)
             {
                 inputHeightNum = checkHeightParity(inputHeightNum);
             }
