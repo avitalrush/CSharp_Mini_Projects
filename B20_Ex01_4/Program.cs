@@ -155,8 +155,8 @@ namespace B20_Ex01_4
 
         private static bool isPalindrome(string i_Str)
         {
-            bool stringIsPalindrome;
             int strLen = i_Str.Length;
+            bool stringIsPalindrome;
 
             if (strLen == 1 || strLen == 0)
             {
