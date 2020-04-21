@@ -4,7 +4,7 @@ namespace B20_Ex01_3
 {
     public class Program
     {
-        private static bool s_IsHeightValid = false;
+        //private static bool io_IsHeightValid = false;
 
         public static void Main()
         {
@@ -24,19 +24,20 @@ namespace B20_Ex01_3
 
         private static int getValidHeight()
         {
-            string inputHeightStr;
             int inputHeightNum;
+            string inputHeightStr;
+            bool isHeightValid = false;
 
             do
             {
                 inputHeightStr = getHeight();
-                inputHeightNum = validateHeightInput(inputHeightStr);
-                if (!s_IsHeightValid)
+                inputHeightNum = validateHeightInput(inputHeightStr, ref isHeightValid);
+                if (!isHeightValid)
                 {
                     Console.WriteLine("Not a valid input. Please enter a valid number for the hour glass height: ");
                 }
             }
-            while (!s_IsHeightValid);
+            while (!isHeightValid);
 
             return inputHeightNum;
         }
@@ -48,12 +49,12 @@ namespace B20_Ex01_3
             return inputHeightStr;
         }
 
-        private static int validateHeightInput(string i_InputHeightStr)
+        private static int validateHeightInput(string i_InputHeightStr, ref bool o_IsHeightValid)
         {
             int inputHeightNum;
 
-            s_IsHeightValid = int.TryParse(i_InputHeightStr, out inputHeightNum);
-            if (s_IsHeightValid)
+            o_IsHeightValid = int.TryParse(i_InputHeightStr, out inputHeightNum);
+            if (o_IsHeightValid)
             {
                 inputHeightNum = checkHeightParity(inputHeightNum);
             }

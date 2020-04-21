@@ -4,7 +4,7 @@ namespace B20_Ex01_4
 {
     public class Program
     {
-        private const int k_LenOfInput = 8;
+        //private const int lenOfInput = 8;
         private static bool s_IsLettersInput = false;
         private static bool s_IsDigitsInput = false;
         private static int s_InputNum = 0;
@@ -58,7 +58,8 @@ namespace B20_Ex01_4
 
         private static bool isInputLenValid(string i_Str)
         {
-            return i_Str.Length == k_LenOfInput;
+            int lenOfInput = 8;
+            return i_Str.Length == lenOfInput;
         }
 
         private static bool isInputTypeValid(string i_Str)
@@ -177,9 +178,9 @@ namespace B20_Ex01_4
 
         private static int countUpperCaseLetters(string i_Str)
         {
-            int upperCount = 0;
+            int upperCount = 0, lenOfInput = 8;
 
-            for (int i = 0; i <= k_LenOfInput - 1; i++) 
+            for (int i = 0; i <= lenOfInput - 1; i++) 
             {
                 if (char.IsUpper(i_Str[i]))
                 {

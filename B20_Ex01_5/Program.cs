@@ -4,7 +4,7 @@ namespace B20_Ex01_5
 {
     public class Program
     {
-        private const int k_LenOfInput = 9;
+        //private const int lenOfInput = 9;
 
         public static void Main()
         {
@@ -70,7 +70,9 @@ namespace B20_Ex01_5
 
         private static bool isInputLenValid(string i_Str)
         {
-            return i_Str.Length == k_LenOfInput;
+            int lenOfInput = 9;
+
+            return i_Str.Length == lenOfInput;
         }
 
         private static void printStringStats(string i_Str)

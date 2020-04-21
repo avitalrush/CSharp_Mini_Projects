@@ -4,8 +4,8 @@ namespace B20_Ex01_1
 {
     public class Program
     {
-        private const int k_NumOfNumbers = 3;
-        private const int k_LenOfInput = 9;
+        //private const int k_NumOfNumbers = 3;
+        //private const int k_LenOfInput = 9;
 
         public static void Main()
         {
@@ -17,7 +17,8 @@ namespace B20_Ex01_1
             int inputInDecimal1, inputInDecimal2, inputInDecimal3, numOfNumbers = 3, lenOfInput = 9;
             string inputInBinary1, inputInBinary2, inputInBinary3;
 
-            Console.WriteLine("Please enter " + numOfNumbers + " " + lenOfInput + "-digits binary numbers.");
+            //Console.WriteLine("Please enter " + numOfNumbers + " " + lenOfInput + "-digits binary numbers.", numOfNumbers, lenOfInput);
+            Console.WriteLine("Please enter {0} {1}-digits binary numbers.", numOfNumbers, lenOfInput);
 
             Console.WriteLine("Please enter the first number: ");
             inputInBinary1 = getValidInput();
@@ -277,6 +278,7 @@ namespace B20_Ex01_1
         private static int multiplyDigitByTwoPower(int i_BinaryDigit, int i_PowerByIndex)
         {
             int powerOfTwoByIndex = (int)Math.Pow(2, i_PowerByIndex);
+
             return i_BinaryDigit * powerOfTwoByIndex;
         }
 
@@ -288,6 +290,7 @@ namespace B20_Ex01_1
         private static bool isInputLenValid(string i_Str)
         {
             int lenOfInput = 9;
+
             return i_Str.Length == lenOfInput;
         }
 
