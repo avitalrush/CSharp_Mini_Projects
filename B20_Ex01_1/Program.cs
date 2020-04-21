@@ -14,10 +14,10 @@ namespace B20_Ex01_1
 
         private static void start()
         {
-            int inputInDecimal1, inputInDecimal2, inputInDecimal3;
+            int inputInDecimal1, inputInDecimal2, inputInDecimal3, numOfNumbers = 3, lenOfInput = 9;
             string inputInBinary1, inputInBinary2, inputInBinary3;
 
-            Console.WriteLine("Please enter " + k_NumOfNumbers + " " + k_LenOfInput + "-digits binary numbers.");
+            Console.WriteLine("Please enter " + numOfNumbers + " " + lenOfInput + "-digits binary numbers.");
 
             Console.WriteLine("Please enter the first number: ");
             inputInBinary1 = getValidInput();
@@ -94,28 +94,29 @@ namespace B20_Ex01_1
 
         private static void printAvgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3)
         {
+            int numOfNumbers = 3;
             float avg = avgNumOfZerosInNum(i_Str1, i_Str2, i_Str3);
 
-            Console.WriteLine("Average num of Zeros in all {0} numbers is: {1:0.##}", k_NumOfNumbers, avg);
+            Console.WriteLine("Average num of Zeros in all {0} numbers is: {1:0.##}", numOfNumbers, avg);
         }
 
         private static float avgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3)
         {
-            int totalZerosCount = 0;
+            int totalZerosCount = 0, numOfNumbers = 3;
             float avgOfZeros = 0;
 
             totalZerosCount += countNumOfZeros(i_Str1);
             totalZerosCount += countNumOfZeros(i_Str2);
             totalZerosCount += countNumOfZeros(i_Str3);
 
-            return avgOfZeros = (float)totalZerosCount / k_NumOfNumbers;
+            return avgOfZeros = (float)totalZerosCount / numOfNumbers;
         }
 
         private static int countNumOfZeros(string i_Str)
         {
-            int countZeros = 0;
+            int countZeros = 0, lenOfInput = 9;
 
-            for (int i = 0; i < k_LenOfInput; i++)
+            for (int i = 0; i < lenOfInput; i++)
             {
                 if (i_Str[i] == '0')
                 {
@@ -128,28 +129,29 @@ namespace B20_Ex01_1
 
         private static void printAvgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)
         {
+            int numOfNumbers = 3;
             float avg = avgNumOfOnesInNum(i_Str1, i_Str2, i_Str3);
 
-            Console.WriteLine("Average num of Ones in all {0} numbers is: {1:0.##}", k_NumOfNumbers, avg);
+            Console.WriteLine("Average num of Ones in all {0} numbers is: {1:0.##}", numOfNumbers, avg);
         }
 
         private static float avgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)
         {
-            int totalOnesCount = 0;
+            int totalOnesCount = 0, numOfNumbers = 3;
             float avgOfOnes = 0;
 
             totalOnesCount += countNumOfOnes(i_Str1);
             totalOnesCount += countNumOfOnes(i_Str2);
             totalOnesCount += countNumOfOnes(i_Str3);
 
-            return avgOfOnes = (float)totalOnesCount / k_NumOfNumbers;
+            return avgOfOnes = (float)totalOnesCount / numOfNumbers;
         }
 
         private static int countNumOfOnes(string i_Str)
         {
-            int countOnes = 0;
+            int countOnes = 0, lenOfInput = 9;
 
-            for (int i = 0; i < k_LenOfInput; i++)
+            for (int i = 0; i < lenOfInput; i++)
             {
                 if (i_Str[i] == '1')
                 {
@@ -162,7 +164,7 @@ namespace B20_Ex01_1
 
         private static void printHowManyArePowersOfTwo(int i_Num1, int i_Num2, int i_Num3)
         {
-            int countPowersOfTwo = 0;
+            int countPowersOfTwo = 0, numOfNumbers = 3;
 
             if (isPowerOfTwo(i_Num1))
             {
@@ -179,7 +181,7 @@ namespace B20_Ex01_1
                 countPowersOfTwo++;
             }
 
-            Console.WriteLine("{0} of the {1} input numbers are Power of 2", countPowersOfTwo, k_NumOfNumbers);
+            Console.WriteLine("{0} of the {1} input numbers are Power of 2", countPowersOfTwo, numOfNumbers);
         }
 
         private static bool isPowerOfTwo(int i_Num)
@@ -194,7 +196,7 @@ namespace B20_Ex01_1
 
         private static void printHowManyAreAscOrder(string i_Str1, string i_Str2, string i_Str3)
         {
-            int countAscOrder = 0;
+            int countAscOrder = 0, numOfNumbers = 3;
 
             if (isDigitsInAscendingOrder(i_Str1))
             {
@@ -211,7 +213,7 @@ namespace B20_Ex01_1
                 countAscOrder++;
             }
 
-            Console.WriteLine("{0} of the {1} input numbers' digits are in Ascending order", countAscOrder, k_NumOfNumbers);
+            Console.WriteLine("{0} of the {1} input numbers' digits are in Ascending order", countAscOrder, numOfNumbers);
         }
 
         private static bool isDigitsInAscendingOrder(string i_Str)
@@ -285,7 +287,8 @@ namespace B20_Ex01_1
 
         private static bool isInputLenValid(string i_Str)
         {
-            return i_Str.Length == k_LenOfInput;
+            int lenOfInput = 9;
+            return i_Str.Length == lenOfInput;
         }
 
         private static bool isInputContainOnlyZeroOne(string i_Str)
