@@ -4,9 +4,10 @@ namespace B20_Ex01_4
 {
     public class Program
     {
-        //private const int lenOfInput = 8;
-        private static bool s_IsLettersInput = false;
-        private static bool s_IsDigitsInput = false;
+        //private const int k_LenOfInput = 8;
+        //private static bool s_IsLettersInput = false;
+       // private static bool s_IsDigitsInput = false;
+
         private static int s_InputNum = 0;
 
         public static void Main()
@@ -17,15 +18,17 @@ namespace B20_Ex01_4
         private static void start()
         {
             string inputStr;
+            bool isLettersInput = false;
+            bool isDigitsInput = false;
 
             Console.WriteLine("Please enter 8-char string, with only digits or english letters: ");
-            inputStr = getValidInput();
-            analyzeInputString(inputStr);
+            inputStr = getValidInput(ref isLettersInput, ref isDigitsInput);
+            analyzeInputString(inputStr, isLettersInput, isDigitsInput);
 
             Console.ReadLine();
         }
 
-        private static string getValidInput()
+        private static string getValidInput(ref bool io_IsLettersInput, ref bool io_IsDigitsInput)
         {
             string inputStr;
             bool isInputValid;
@@ -33,7 +36,7 @@ namespace B20_Ex01_4
             do
             {
                 inputStr = getInput();
-                isInputValid = validateInput(inputStr);
+                isInputValid = validateInput(inputStr, ref io_IsLettersInput, ref io_IsDigitsInput);
                 if (!isInputValid)
                 {
                     Console.WriteLine("Not a valid input. Please enter 8-char string, with only digits or english letters: ");
@@ -51,23 +54,24 @@ namespace B20_Ex01_4
             return inputStr;
         }
 
-        private static bool validateInput(string i_Str)
+        private static bool validateInput(string i_Str, ref bool io_IsLettersInput, ref bool io_IsDigitsInput)
         {
-            return isInputLenValid(i_Str) && isInputTypeValid(i_Str);
+            return isInputLenValid(i_Str) && isInputTypeValid(i_Str, ref io_IsLettersInput, ref io_IsDigitsInput);
         }
 
         private static bool isInputLenValid(string i_Str)
         {
             int lenOfInput = 8;
+          
             return i_Str.Length == lenOfInput;
         }
 
-        private static bool isInputTypeValid(string i_Str)
+        private static bool isInputTypeValid(string i_Str, ref bool io_IsLettersInput, ref bool io_IsDigitsInput)
         {
-            return isLettersInput(i_Str) || isDigitsInput(i_Str);
+            return isLettersInput(i_Str, ref io_IsLettersInput) || isDigitsInput(i_Str, ref io_IsDigitsInput);
         }
 
-        private static bool isLettersInput(string i_Str)
+        private static bool isLettersInput(string i_Str, ref bool io_IsLettersInput)
         {
             bool stringContainsOnlyLetters = true;
 
@@ -81,19 +85,19 @@ namespace B20_Ex01_4
 
             if(stringContainsOnlyLetters)
             {
-                s_IsLettersInput = true;
+                io_IsLettersInput = true;
             }
 
             return stringContainsOnlyLetters;
         }
 
-        private static bool isDigitsInput(string i_Str)
+        private static bool isDigitsInput(string i_Str, ref bool io_IsDigitsInput)
         {
             bool stringContainsOnlyDigits = int.TryParse(i_Str, out s_InputNum);
 
             if (stringContainsOnlyDigits)
             {
-                s_IsDigitsInput = true;
+                io_IsDigitsInput = true;
             }
 
             return stringContainsOnlyDigits;
@@ -120,7 +124,7 @@ namespace B20_Ex01_4
             */
         }
 
-        private static void analyzeInputString(string i_Str)
+        private static void analyzeInputString(string i_Str, bool i_IsLettersInput, bool i_IsDigitsInput)
         {
             if (isPalindrome(i_Str))
             {
@@ -131,7 +135,7 @@ namespace B20_Ex01_4
                 Console.WriteLine("{0} is NOT a Palindrome", i_Str);
             }
 
-            if (s_IsDigitsInput)
+            if (i_IsDigitsInput)
             {
                 if (isDividedByFive(s_InputNum))
                 {
@@ -142,7 +146,7 @@ namespace B20_Ex01_4
                     Console.WriteLine("{0} is NOT divided by 5", i_Str);
                 }
             }
-            else if (s_IsLettersInput)
+            else if (i_IsLettersInput)
             {
                 int count = countUpperCaseLetters(i_Str);
                 Console.WriteLine("There are {0} uppercase letters in {1}", count, i_Str);
