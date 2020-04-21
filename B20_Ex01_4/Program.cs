@@ -6,9 +6,8 @@ namespace B20_Ex01_4
     {
         //private const int k_LenOfInput = 8;
         //private static bool s_IsLettersInput = false;
-       // private static bool s_IsDigitsInput = false;
-
-        private static int s_InputNum = 0;
+        //private static bool s_IsDigitsInput = false;
+        //private static int s_InputNum = 0;
 
         public static void Main()
         {
@@ -17,18 +16,19 @@ namespace B20_Ex01_4
 
         private static void start()
         {
+            int inputNum = 0;
             string inputStr;
             bool isLettersInput = false;
             bool isDigitsInput = false;
 
             Console.WriteLine("Please enter 8-char string, with only digits or english letters: ");
-            inputStr = getValidInput(ref isLettersInput, ref isDigitsInput);
-            analyzeInputString(inputStr, isLettersInput, isDigitsInput);
+            inputStr = getValidInput(ref isLettersInput, ref isDigitsInput, ref inputNum);
+            analyzeInputString(inputStr, isLettersInput, isDigitsInput, inputNum);
 
             Console.ReadLine();
         }
 
-        private static string getValidInput(ref bool io_IsLettersInput, ref bool io_IsDigitsInput)
+        private static string getValidInput(ref bool io_IsLettersInput, ref bool io_IsDigitsInput, ref int io_InputNum)
         {
             string inputStr;
             bool isInputValid;
@@ -36,7 +36,7 @@ namespace B20_Ex01_4
             do
             {
                 inputStr = getInput();
-                isInputValid = validateInput(inputStr, ref io_IsLettersInput, ref io_IsDigitsInput);
+                isInputValid = validateInput(inputStr, ref io_IsLettersInput, ref io_IsDigitsInput, ref io_InputNum);
                 if (!isInputValid)
                 {
                     Console.WriteLine("Not a valid input. Please enter 8-char string, with only digits or english letters: ");
@@ -54,9 +54,9 @@ namespace B20_Ex01_4
             return inputStr;
         }
 
-        private static bool validateInput(string i_Str, ref bool io_IsLettersInput, ref bool io_IsDigitsInput)
+        private static bool validateInput(string i_Str, ref bool io_IsLettersInput, ref bool io_IsDigitsInput, ref int io_InputNum)
         {
-            return isInputLenValid(i_Str) && isInputTypeValid(i_Str, ref io_IsLettersInput, ref io_IsDigitsInput);
+            return isInputLenValid(i_Str) && isInputTypeValid(i_Str, ref io_IsLettersInput, ref io_IsDigitsInput, ref io_InputNum);
         }
 
         private static bool isInputLenValid(string i_Str)
@@ -66,9 +66,9 @@ namespace B20_Ex01_4
             return i_Str.Length == lenOfInput;
         }
 
-        private static bool isInputTypeValid(string i_Str, ref bool io_IsLettersInput, ref bool io_IsDigitsInput)
+        private static bool isInputTypeValid(string i_Str, ref bool io_IsLettersInput, ref bool io_IsDigitsInput, ref int io_InputNum)
         {
-            return isLettersInput(i_Str, ref io_IsLettersInput) || isDigitsInput(i_Str, ref io_IsDigitsInput);
+            return isLettersInput(i_Str, ref io_IsLettersInput) || isDigitsInput(i_Str, ref io_IsDigitsInput, ref io_InputNum);
         }
 
         private static bool isLettersInput(string i_Str, ref bool io_IsLettersInput)
@@ -91,9 +91,9 @@ namespace B20_Ex01_4
             return stringContainsOnlyLetters;
         }
 
-        private static bool isDigitsInput(string i_Str, ref bool io_IsDigitsInput)
+        private static bool isDigitsInput(string i_Str, ref bool io_IsDigitsInput, ref int o_InputNum)
         {
-            bool stringContainsOnlyDigits = int.TryParse(i_Str, out s_InputNum);
+            bool stringContainsOnlyDigits = int.TryParse(i_Str, out o_InputNum);
 
             if (stringContainsOnlyDigits)
             {
@@ -124,7 +124,7 @@ namespace B20_Ex01_4
             */
         }
 
-        private static void analyzeInputString(string i_Str, bool i_IsLettersInput, bool i_IsDigitsInput)
+        private static void analyzeInputString(string i_Str, bool i_IsLettersInput, bool i_IsDigitsInput, int i_InputNum)
         {
             if (isPalindrome(i_Str))
             {
@@ -137,7 +137,7 @@ namespace B20_Ex01_4
 
             if (i_IsDigitsInput)
             {
-                if (isDividedByFive(s_InputNum))
+                if (isDividedByFive(i_InputNum))
                 {
                     Console.WriteLine("{0} is divided by 5", i_Str);
                 }
