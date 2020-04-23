@@ -77,10 +77,24 @@ namespace B20_Ex01_5
 
         private static void printStringStats(string i_Str)
         {
-            biggestDigit(i_Str);
-            smallestDigit(i_Str);
-            howManyDigitsCanBeFullyDividedByThree(i_Str);
-            howManyDigitsBiggerThanUnitsDigit(i_Str);
+            //biggestDigit(i_Str);
+            //smallestDigit(i_Str);
+            //howManyDigitsCanBeFullyDividedByThree(i_Str);
+            //howManyDigitsBiggerThanUnitsDigit(i_Str);
+
+            int maxDigit = biggestDigit(i_Str);
+            int minDigit = smallestDigit(i_Str);
+            int countHowManyFullDividedByThree = howManyDigitsCanBeFullyDividedByThree(i_Str);
+            int countDigitsBiggerThanUnits = howManyDigitsBiggerThanUnitsDigit(i_Str);
+
+            string outputMsg = string.Format(
+@"In {0} the biggest digit is: {1}
+the smallest digit is: {2}
+there are {3} digits can be fully divided by 3 without reminder
+there are {4} digits bigger than the units digit.",
+            i_Str, maxDigit, minDigit, countHowManyFullDividedByThree, countDigitsBiggerThanUnits);
+
+            Console.WriteLine(outputMsg);
         }
 
         private static int convertFromCharToInt(char i_Chr)
@@ -88,7 +102,7 @@ namespace B20_Ex01_5
             return i_Chr - '0';
         }
 
-        private static void biggestDigit(string i_Str)
+        private static int biggestDigit(string i_Str)
         {
             int firstDigit = 0;
             int maxDigit = convertFromCharToInt(i_Str[firstDigit]);
@@ -103,10 +117,11 @@ namespace B20_Ex01_5
                 }
             }
 
-            Console.WriteLine("The biggest digit in the input {0} is: {1}", i_Str, maxDigit);
+            return maxDigit;
+            //Console.WriteLine("The biggest digit in the input {0} is: {1}", i_Str, maxDigit);
         }
 
-        private static void smallestDigit(string i_Str)
+        private static int smallestDigit(string i_Str)
         {
             int firstDigit = 0;
             int minDigit = convertFromCharToInt(i_Str[firstDigit]);
@@ -121,10 +136,11 @@ namespace B20_Ex01_5
                 }
             }
 
-            Console.WriteLine("The smallest digit in the input {0} is: {1}", i_Str, minDigit);
+            return minDigit;
+            //Console.WriteLine("The smallest digit in the input {0} is: {1}", i_Str, minDigit);
         }
 
-        private static void howManyDigitsCanBeFullyDividedByThree(string i_Str)
+        private static int howManyDigitsCanBeFullyDividedByThree(string i_Str)
         {
             int countHowManyFullDividedByThree = 0;
             int currentDigit;
@@ -138,10 +154,11 @@ namespace B20_Ex01_5
                 }
             }
 
-            Console.WriteLine("In the input {0}, there are {1} digits can be fully divided by 3 without reminder", i_Str, countHowManyFullDividedByThree);
+            return countHowManyFullDividedByThree;
+            //Console.WriteLine("In the input {0}, there are {1} digits can be fully divided by 3 without reminder", i_Str, countHowManyFullDividedByThree);
         }
 
-        private static void howManyDigitsBiggerThanUnitsDigit(string i_Str)
+        private static int howManyDigitsBiggerThanUnitsDigit(string i_Str)
         {
             int countDigitsBiggerThanUnits = 0;
             int unitsDigitIndex = i_Str.Length - 1;
@@ -155,7 +172,8 @@ namespace B20_Ex01_5
                 }
             }
 
-            Console.WriteLine("In the input {0}, there are {1} digits bigger than the units digit", i_Str, countDigitsBiggerThanUnits);
+            return countDigitsBiggerThanUnits;
+            //Console.WriteLine("In the input {0}, there are {1} digits bigger than the units digit", i_Str, countDigitsBiggerThanUnits);
         }
     }
 }
