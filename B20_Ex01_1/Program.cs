@@ -71,34 +71,60 @@ namespace B20_Ex01_1
             string decNumStr1 = i_InputNum1.ToString();
             string decNumStr2 = i_InputNum2.ToString();
             string decNumStr3 = i_InputNum3.ToString();
+            int numOfNumbers = 3;
+            float avgOfZeros = getAvgNumOfZerosInNum(i_InputStr1, i_InputStr2, i_InputStr3);
+            float avgOfOnes = getAvgNumOfOnesInNum(i_InputStr1, i_InputStr2, i_InputStr3);
+            int countPowersOfTwo = getHowManyArePowersOfTwo(i_InputNum1, i_InputNum2, i_InputNum3);
+            int countAscOrder = getHowManyAreAscOrder(decNumStr1, decNumStr2, decNumStr3);
+            int maxOfInputs = getMaxNum(i_InputNum1, i_InputNum2, i_InputNum3);
+            int minOfInputs = getMinNum(i_InputNum1, i_InputNum2, i_InputNum3);
+            string outputMsg = string.Format(
+@"The input numbers in Decimal Format are:
+{0}
+{1}
+{2}
+Average num of Zeros in all {3} numbers is: {4:0.##}
+Average num of Ones in all {3} numbers is: {5:0.##}
+{6} of the {3} input numbers are Power of 2
+{7} of the {3} input numbers' digits are in Ascending order
+The Max num is {8}
+The Min num is {9}", 
+            i_InputNum1, i_InputNum2, i_InputNum3, numOfNumbers, avgOfZeros, 
+            avgOfOnes, countPowersOfTwo, countAscOrder, maxOfInputs, minOfInputs);
+            
+            Console.WriteLine(outputMsg);
 
+            /*
             Console.WriteLine("The input numbers in Decimal Format are:");
             printDecNum(i_InputNum1);
             printDecNum(i_InputNum2);
             printDecNum(i_InputNum3);
 
-            printAvgNumOfZerosInNum(i_InputStr1, i_InputStr2, i_InputStr3);
-            printAvgNumOfOnesInNum(i_InputStr1, i_InputStr2, i_InputStr3);
+            getAvgNumOfZerosInNum(i_InputStr1, i_InputStr2, i_InputStr3);
+            getAvgNumOfOnesInNum(i_InputStr1, i_InputStr2, i_InputStr3);
 
-            printHowManyArePowersOfTwo(i_InputNum1, i_InputNum2, i_InputNum3);
+            getHowManyArePowersOfTwo(i_InputNum1, i_InputNum2, i_InputNum3);
 
-            printHowManyAreAscOrder(decNumStr1, decNumStr2, decNumStr3);
+            getHowManyAreAscOrder(decNumStr1, decNumStr2, decNumStr3);
 
-            printMaxNum(i_InputNum1, i_InputNum2, i_InputNum3);
-            printMinNum(i_InputNum1, i_InputNum2, i_InputNum3);
+            getMaxNum(i_InputNum1, i_InputNum2, i_InputNum3);
+            getMinNum(i_InputNum1, i_InputNum2, i_InputNum3);
+
+            */
         }
 
+        /*
         private static void printDecNum(int i_Num)
         {
             Console.WriteLine(i_Num);
         }
+        */
 
-        private static void printAvgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3)
+        private static float getAvgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3)
         {
-            int numOfNumbers = 3;
             float avg = avgNumOfZerosInNum(i_Str1, i_Str2, i_Str3);
 
-            Console.WriteLine("Average num of Zeros in all {0} numbers is: {1:0.##}", numOfNumbers, avg);
+            return avg;
         }
 
         private static float avgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3)
@@ -128,12 +154,11 @@ namespace B20_Ex01_1
             return countZeros;
         }
 
-        private static void printAvgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)
+        private static float getAvgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)
         {
-            int numOfNumbers = 3;
             float avg = avgNumOfOnesInNum(i_Str1, i_Str2, i_Str3);
 
-            Console.WriteLine("Average num of Ones in all {0} numbers is: {1:0.##}", numOfNumbers, avg);
+            return avg;
         }
 
         private static float avgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)
@@ -163,9 +188,9 @@ namespace B20_Ex01_1
             return countOnes;
         }
 
-        private static void printHowManyArePowersOfTwo(int i_Num1, int i_Num2, int i_Num3)
+        private static int getHowManyArePowersOfTwo(int i_Num1, int i_Num2, int i_Num3)
         {
-            int countPowersOfTwo = 0, numOfNumbers = 3;
+            int countPowersOfTwo = 0;
 
             if (isPowerOfTwo(i_Num1))
             {
@@ -182,7 +207,7 @@ namespace B20_Ex01_1
                 countPowersOfTwo++;
             }
 
-            Console.WriteLine("{0} of the {1} input numbers are Power of 2", countPowersOfTwo, numOfNumbers);
+            return countPowersOfTwo;
         }
 
         private static bool isPowerOfTwo(int i_Num)
@@ -195,9 +220,9 @@ namespace B20_Ex01_1
             return i_Num == 1;
         }
 
-        private static void printHowManyAreAscOrder(string i_Str1, string i_Str2, string i_Str3)
+        private static int getHowManyAreAscOrder(string i_Str1, string i_Str2, string i_Str3)
         {
-            int countAscOrder = 0, numOfNumbers = 3;
+            int countAscOrder = 0;
 
             if (isDigitsInAscendingOrder(i_Str1))
             {
@@ -214,7 +239,7 @@ namespace B20_Ex01_1
                 countAscOrder++;
             }
 
-            Console.WriteLine("{0} of the {1} input numbers' digits are in Ascending order", countAscOrder, numOfNumbers);
+            return countAscOrder;
         }
 
         private static bool isDigitsInAscendingOrder(string i_Str)
@@ -232,20 +257,20 @@ namespace B20_Ex01_1
             return digitsInAscendingOrder;
         }
 
-        private static void printMaxNum(int i_Num1, int i_Num2, int i_Num3)
+        private static int getMaxNum(int i_Num1, int i_Num2, int i_Num3)
         {
             int tempMax = Math.Max(i_Num1, i_Num2);
             int max = Math.Max(tempMax, i_Num3);
 
-            Console.WriteLine("The Max num is {0}", max);
+            return max;
         }
 
-        private static void printMinNum(int i_Num1, int i_Num2, int i_Num3)
+        private static int getMinNum(int i_Num1, int i_Num2, int i_Num3)
         {
             int tempMin = Math.Min(i_Num1, i_Num2);
             int min = Math.Min(tempMin, i_Num3);
 
-            Console.WriteLine("The Min num is {0}", min);
+            return min;
         }
 
         private static int convertFromCharToInt(char i_Chr)
@@ -284,7 +309,7 @@ namespace B20_Ex01_1
 
         private static bool checkIfValidInput(string i_Str)
         {
-            return isInputLenValid(i_Str) && isInputContainOnlyZeroOne(i_Str);
+            return isInputLenValid(i_Str) && isInputContainOnlyZeroOne(i_Str) && !isInputZero(i_Str);
         }
 
         private static bool isInputLenValid(string i_Str)
@@ -307,6 +332,13 @@ namespace B20_Ex01_1
             }
 
             return inputContainOnlyZeroOne;
+        }
+
+        private static bool isInputZero(string i_Str)
+        {
+            string strZero = "000000000";
+
+            return i_Str == strZero;
         }
     }
 }

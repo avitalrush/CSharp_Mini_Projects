@@ -50,7 +50,14 @@ namespace B20_Ex01_5
 
         private static bool validateInput(string i_Str)
         {
-            return isInputLenValid(i_Str) && isInputValid(i_Str);
+            return isInputLenValid(i_Str) && isInputValid(i_Str) && !isInputZero(i_Str);
+        }
+
+        private static bool isInputZero(string i_Str)
+        {
+            string strZero = "000000000";
+
+            return i_Str == strZero;
         }
 
         private static bool isInputValid(string i_Str)
