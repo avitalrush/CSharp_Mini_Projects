@@ -21,7 +21,36 @@ namespace B20_Ex01_2
             int numOfSpacesToPrint = (i_OriginNumOfStars - i_CurrentNumOfStars) / 2;
             int numOfStarsToPrint = i_CurrentNumOfStars;
 
-            ///////// VERSION 1: 1 return call /////////
+            // VERSION WITH NO EXPLICIT RETURN CALL, ONLY 1 RETURN CALL AT THE END OF VOID METHOD:
+
+            if (i_CurrentNumOfStars <= i_OriginNumOfStars)
+            {
+                PrintSpacesStars(numOfSpacesToPrint, numOfStarsToPrint);    // PRINT LINE OF SPACES AND STARS
+
+                // PREPARE THE PARAMETERS FOR THE NEXT REC CALL
+
+                if (i_CurrentNumOfStars == 1)
+                {
+                    i_CurrentNumOfStars += 2;
+                    i_IsAscending = true;
+                }
+                else
+                {
+                    if (!i_IsAscending)
+                    {
+                        i_CurrentNumOfStars -= 2;
+                    }
+                    else
+                    {
+                        i_CurrentNumOfStars += 2;
+                    }
+                }
+
+                PrintStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars, i_IsAscending);    // REC CALL
+            }
+
+            /*
+            // VERSION WITH 1 EXPLICIT RETURN CALL + 1 RETURN CALL AT THE END OF VOID METHOD:
 
             if (i_CurrentNumOfStars > i_OriginNumOfStars)
             {
@@ -50,43 +79,6 @@ namespace B20_Ex01_2
             }
 
             PrintStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars, i_IsAscending);    // REC CALL
-
-            /*
-
-            ///////// VERSION 2: 2 return calls && repetitive checking if i_CurrentNumOfStars == i_OriginNumOfStars  /////////
-
-            printSpacesStars(numOfSpacesToPrint, numOfStarsToPrint);    // PRINT LINE OF SPACES AND STARS
-
-            // PREPARE THE PARAMETERS FOR THE NEXT REC CALL
-                if (i_CurrentNumOfStars == 1)
-            {
-                if(i_OriginNumOfStars == 1)
-                {
-                    return;
-                }
-                else
-                {
-                    i_IsAscending = true;
-                    i_CurrentNumOfStars += 2;
-                }
-            }
-            else if (i_CurrentNumOfStars == i_OriginNumOfStars && i_IsAscending)
-            {
-                return;
-            }
-            else
-            {
-                if (i_IsAscending)
-                {
-                    i_CurrentNumOfStars += 2;
-                }
-                else
-                {
-                    i_CurrentNumOfStars -= 2;
-                }
-            }
-            printStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars, i_IsAscending);    // REC CALL
-
             */
         }
 
