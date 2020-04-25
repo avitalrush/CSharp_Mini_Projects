@@ -70,7 +70,24 @@ namespace B20_Ex01_4
 
         private static bool isInputTypeValid(string i_Str, ref bool io_IsLettersInput, ref bool io_IsDigitsInput, ref int io_InputNum)
         {
-            return isLettersInput(i_Str, ref io_IsLettersInput) || isDigitsInput(i_Str, ref io_IsDigitsInput, ref io_InputNum);
+            bool stringContainsOnlyLettersOrDigits = isInputContainsOnlyDigitsOrLetters(i_Str);
+
+            return stringContainsOnlyLettersOrDigits && (isLettersInput(i_Str, ref io_IsLettersInput) || isDigitsInput(i_Str, ref io_IsDigitsInput, ref io_InputNum));
+        }
+
+        private static bool isInputContainsOnlyDigitsOrLetters(string i_Str)
+        {
+            bool stringContainsOnlyLettersOrDigits = true;
+
+            for (int i = 0; i < i_Str.Length && stringContainsOnlyLettersOrDigits; i++)
+            {
+                if (!char.IsLetter(i_Str[i]) && !char.IsDigit(i_Str[i]))
+                {
+                    stringContainsOnlyLettersOrDigits = false;
+                }
+            }
+
+            return stringContainsOnlyLettersOrDigits;
         }
 
         private static bool isLettersInput(string i_Str, ref bool io_IsLettersInput)

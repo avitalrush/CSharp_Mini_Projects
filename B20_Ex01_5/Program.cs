@@ -88,7 +88,6 @@ namespace B20_Ex01_5
             int minDigit = getMinDigit(i_Str);
             int countHowManyDigitsDividedByThree = getHowManyDigitsDividedByThree(i_Str);
             int countHowManyDigitsGreaterThanUnits = getHowManyDigitsGreaterThanUnits(i_Str);
-
             string outputMsg = string.Format(
 @"In {0} the biggest digit is: {1}
 the smallest digit is: {2}
