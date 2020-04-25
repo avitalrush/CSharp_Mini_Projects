@@ -89,8 +89,16 @@ Average num of Ones in all {3} numbers is: {5:0.##}
 {7} of the {3} input numbers' digits are in Ascending order
 The Max num is {8}
 The Min num is {9}", 
-            i_InputNum1, i_InputNum2, i_InputNum3, numOfNumbers, avgOfZeros, 
-            avgOfOnes, countPowersOfTwo, countAscOrder, maxOfInputs, minOfInputs);
+            i_InputNum1, 
+            i_InputNum2, 
+            i_InputNum3, 
+            numOfNumbers, 
+            avgOfZeros, 
+            avgOfOnes, 
+            countPowersOfTwo, 
+            countAscOrder, 
+            maxOfInputs, 
+            minOfInputs);
             
             Console.WriteLine(outputMsg);
 
