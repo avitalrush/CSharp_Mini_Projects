@@ -4,7 +4,7 @@ namespace B20_Ex01_3
 {
     public class Program
     {
-        //private static bool io_IsHeightValid = false;
+        //private static bool o_IsHeightValid = false;
 
         public static void Main()
         {
@@ -26,18 +26,20 @@ namespace B20_Ex01_3
         {
             int inputHeightNum;
             string inputHeightStr;
-            bool isHeightValid = false;
+            bool isHeightValid;
+            bool isHeightPositive;
 
             do
             {
                 inputHeightStr = getHeight();
-                inputHeightNum = validateHeightInput(inputHeightStr, ref isHeightValid);
-                if (!isHeightValid)
+                inputHeightNum = validateHeightInput(inputHeightStr, out isHeightValid);
+                isHeightPositive = checkHeightPositivity(inputHeightNum);
+                if (!isHeightValid || !isHeightPositive)
                 {
                     Console.WriteLine("Not a valid input. Please enter a valid number for the hour glass height: ");
                 }
             }
-            while (!isHeightValid);
+            while (!isHeightValid || !isHeightPositive);
 
             return inputHeightNum;
         }
@@ -49,17 +51,22 @@ namespace B20_Ex01_3
             return inputHeightStr;
         }
 
-        private static int validateHeightInput(string i_InputHeightStr, ref bool io_IsHeightValid)
+        private static int validateHeightInput(string i_InputHeightStr, out bool o_IsHeightValid)
         {
             int inputHeightNum;
 
-            io_IsHeightValid = int.TryParse(i_InputHeightStr, out inputHeightNum);
-            if (io_IsHeightValid)
+            o_IsHeightValid = int.TryParse(i_InputHeightStr, out inputHeightNum);
+            if (o_IsHeightValid)
             {
                 inputHeightNum = checkHeightParity(inputHeightNum);
             }
 
             return inputHeightNum;
+        }
+
+        private static bool checkHeightPositivity(int i_InputHeightNum)
+        {
+            return i_InputHeightNum >= 0;
         }
 
         private static int checkHeightParity(int i_InputHeightNum)
