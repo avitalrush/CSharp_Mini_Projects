@@ -29,9 +29,9 @@ namespace B20_Ex01_1
             Console.WriteLine("Please enter the third number: ");
             inputInBinary3 = getValidInput();
 
-            inputInDecimal1 = convertFromBinaryToDecimal(inputInBinary1);
-            inputInDecimal2 = convertFromBinaryToDecimal(inputInBinary2);
-            inputInDecimal3 = convertFromBinaryToDecimal(inputInBinary3);
+            inputInDecimal1 = convertBinaryToDecimal(inputInBinary1);
+            inputInDecimal2 = convertBinaryToDecimal(inputInBinary2);
+            inputInDecimal3 = convertBinaryToDecimal(inputInBinary3);
 
             printStatisticsOfInput(inputInDecimal1, inputInDecimal2, inputInDecimal3, inputInBinary1, inputInBinary2, inputInBinary3);
 
@@ -281,12 +281,12 @@ The Min num is {9}",
             return min;
         }
 
-        private static int convertFromCharToInt(char i_Chr)
+        private static int convertCharToInt(char i_Chr)
         {
             return i_Chr - '0';
         }
 
-        private static int convertFromBinaryToDecimal(string i_Str)
+        private static int convertBinaryToDecimal(string i_Str)
         {
             int currentBinaryDigit;
             int decimalNumber = 0;
@@ -295,7 +295,7 @@ The Min num is {9}",
 
             for (int indexInStr = mostRightIndex; indexInStr >= 0; indexInStr--)
             {
-                currentBinaryDigit = convertFromCharToInt(i_Str[indexInStr]);
+                currentBinaryDigit = convertCharToInt(i_Str[indexInStr]);
                 powerByIndex = getPowerByIndex(i_Str, indexInStr);
                 decimalNumber += multiplyDigitByTwoPower(currentBinaryDigit, powerByIndex);
             }
