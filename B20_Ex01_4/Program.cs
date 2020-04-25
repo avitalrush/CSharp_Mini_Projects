@@ -7,7 +7,7 @@ namespace B20_Ex01_4
         //private const int k_LenOfInput = 8;
         //private static bool s_IsLettersInput = false;
         //private static bool s_IsDigitsInput = false;
-        //private static int s_InputNum = 0;
+        // private static int s_InputNum = 0;
 
         public static void Main()
         {
