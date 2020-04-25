@@ -4,8 +4,6 @@ namespace B20_Ex01_5
 {
     public class Program
     {
-        //private const int lenOfInput = 9;
-
         public static void Main()
         {
             start();
@@ -13,30 +11,32 @@ namespace B20_Ex01_5
 
         private static void start()
         {
+            int lenOfInput = 9;
             string inputStr;
 
-            Console.WriteLine("Please enter 9-digit input: ");
+            Console.WriteLine("Please enter {0}-digit input: ", lenOfInput);
             inputStr = getValidInput();
-            printStringStats(inputStr);
+            printStatisticsOfInput(inputStr);
 
             Console.ReadLine();
         }
 
         private static string getValidInput()
         {
+            int lenOfInput = 9;
             string inputStr;
-            bool isInputValid;
+            bool isValidInput;
 
             do
             {
                 inputStr = getInput();
-                isInputValid = validateInput(inputStr);
-                if (!isInputValid)
+                isValidInput = validateInput(inputStr);
+                if (!isValidInput)
                 {
-                    Console.WriteLine("Not a valid input. Please enter 9-digit input: ");
+                    Console.WriteLine("Not a valid input. Please enter {0}-digit input: ", lenOfInput);
                 }
             }
-            while (!isInputValid);
+            while (!isValidInput);
 
             return inputStr;
         }
@@ -50,22 +50,29 @@ namespace B20_Ex01_5
 
         private static bool validateInput(string i_Str)
         {
-            return isInputLenValid(i_Str) && isInputValid(i_Str);
+            return isInputLenValid(i_Str) && isInputContainsOnlyDigits(i_Str) && !isInputZero(i_Str);
         }
 
-        private static bool isInputValid(string i_Str)
+        private static bool isInputZero(string i_Str)
         {
-            bool stringContainsOnlyDigits = true;
+            string strZero = "000000000";
 
-            for (int i = 0; i < i_Str.Length && stringContainsOnlyDigits; i++)
+            return i_Str == strZero;
+        }
+
+        private static bool isInputContainsOnlyDigits(string i_Str)
+        {
+            bool isStringContainsOnlyDigits = true;
+
+            for (int i = 0; i < i_Str.Length && isStringContainsOnlyDigits; i++)
             {
                 if (!char.IsDigit(i_Str[i]))
                 {
-                    stringContainsOnlyDigits = false;
+                    isStringContainsOnlyDigits = false;
                 }
             }
 
-            return stringContainsOnlyDigits;
+            return isStringContainsOnlyDigits;
         }
 
         private static bool isInputLenValid(string i_Str)
@@ -75,87 +82,98 @@ namespace B20_Ex01_5
             return i_Str.Length == lenOfInput;
         }
 
-        private static void printStringStats(string i_Str)
+        private static void printStatisticsOfInput(string i_Str)
         {
-            biggestDigit(i_Str);
-            smallestDigit(i_Str);
-            howManyDigitsCanBeFullyDividedByThree(i_Str);
-            howManyDigitsBiggerThanUnitsDigit(i_Str);
+            int maxDigit = getMaxDigit(i_Str);
+            int minDigit = getMinDigit(i_Str);
+            int countHowManyDigitsDividedByThree = getHowManyDigitsDividedByThree(i_Str);
+            int countHowManyDigitsGreaterThanUnits = getHowManyDigitsGreaterThanUnits(i_Str);
+
+            string outputMsg = string.Format(
+@"In {0} the biggest digit is: {1}
+the smallest digit is: {2}
+there are {3} digits that can be divided by 3
+there are {4} digits greater than the units digit.",
+            i_Str, 
+            maxDigit, 
+            minDigit, 
+            countHowManyDigitsDividedByThree, 
+            countHowManyDigitsGreaterThanUnits);
+
+            Console.WriteLine(outputMsg);
         }
 
-        private static int convertFromCharToInt(char i_Chr)
+        private static int convertCharToInt(char i_Chr)
         {
             return i_Chr - '0';
         }
 
-        private static void biggestDigit(string i_Str)
+        private static int getMaxDigit(string i_Str)
         {
-            int firstDigit = 0;
-            int maxDigit = convertFromCharToInt(i_Str[firstDigit]);
+            int maxDigit = 0;
             int currentDigit;
 
-            for (int i = 1; i < i_Str.Length; i++)
+            for (int i = 0; i < i_Str.Length; i++)
             {
-                currentDigit = convertFromCharToInt(i_Str[i]);
+                currentDigit = convertCharToInt(i_Str[i]);
                 if (currentDigit > maxDigit)
                 {
                     maxDigit = currentDigit;
                 }
             }
 
-            Console.WriteLine("The biggest digit in the input {0} is: {1}", i_Str, maxDigit);
+            return maxDigit;
         }
 
-        private static void smallestDigit(string i_Str)
+        private static int getMinDigit(string i_Str)
         {
-            int firstDigit = 0;
-            int minDigit = convertFromCharToInt(i_Str[firstDigit]);
+            int minDigit = 9;
             int currentDigit;
 
-            for (int i = 1; i < i_Str.Length; i++)
+            for (int i = 0; i < i_Str.Length; i++)
             {
-                currentDigit = convertFromCharToInt(i_Str[i]);
+                currentDigit = convertCharToInt(i_Str[i]);
                 if (currentDigit < minDigit)
                 {
                     minDigit = currentDigit;
                 }
             }
 
-            Console.WriteLine("The smallest digit in the input {0} is: {1}", i_Str, minDigit);
+            return minDigit;
         }
 
-        private static void howManyDigitsCanBeFullyDividedByThree(string i_Str)
+        private static int getHowManyDigitsDividedByThree(string i_Str)
         {
-            int countHowManyFullDividedByThree = 0;
+            int counter = 0;
             int currentDigit;
 
             for (int i = 0; i < i_Str.Length; i++)
             {
-                currentDigit = convertFromCharToInt(i_Str[i]);
+                currentDigit = convertCharToInt(i_Str[i]);
                 if (currentDigit % 3 == 0)
                 {
-                    countHowManyFullDividedByThree++;
+                    counter++;
                 }
             }
 
-            Console.WriteLine("In the input {0}, there are {1} digits can be fully divided by 3 without reminder", i_Str, countHowManyFullDividedByThree);
+            return counter;
         }
 
-        private static void howManyDigitsBiggerThanUnitsDigit(string i_Str)
+        private static int getHowManyDigitsGreaterThanUnits(string i_Str)
         {
-            int countDigitsBiggerThanUnits = 0;
+            int counter = 0;
             int unitsDigitIndex = i_Str.Length - 1;
-            int unitsDigit = convertFromCharToInt(i_Str[unitsDigitIndex]);
+            int unitsDigit = convertCharToInt(i_Str[unitsDigitIndex]);
 
-            for (int i = 0; i < i_Str.Length - 1; i++)
+            for (int i = 0; i < unitsDigitIndex; i++)
             {
-                if (convertFromCharToInt(i_Str[i]) > unitsDigit)
+                if (convertCharToInt(i_Str[i]) > unitsDigit)
                 {
-                    countDigitsBiggerThanUnits++;
+                    counter++;
                 }
             }
 
-            Console.WriteLine("In the input {0}, there are {1} digits bigger than the units digit", i_Str, countDigitsBiggerThanUnits);
+            return counter;
         }
     }
 }
