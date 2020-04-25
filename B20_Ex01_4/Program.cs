@@ -17,11 +17,12 @@ namespace B20_Ex01_4
         private static void start()
         {
             int inputNum = 0;
+            int lenOfInput = 8;
             string inputStr;
             bool isLettersInput = false;
             bool isDigitsInput = false;
 
-            Console.WriteLine("Please enter 8-char string, with only digits or english letters: ");
+            Console.WriteLine("Please enter {0}-char string, with only digits or english letters: ", lenOfInput);
             inputStr = getValidInput(ref isLettersInput, ref isDigitsInput, ref inputNum);
             analyzeInputString(inputStr, isLettersInput, isDigitsInput, inputNum);
 
@@ -30,6 +31,7 @@ namespace B20_Ex01_4
 
         private static string getValidInput(ref bool io_IsLettersInput, ref bool io_IsDigitsInput, ref int io_InputNum)
         {
+            int lenOfInput = 8;
             string inputStr;
             bool isInputValid;
 
@@ -39,7 +41,7 @@ namespace B20_Ex01_4
                 isInputValid = validateInput(inputStr, ref io_IsLettersInput, ref io_IsDigitsInput, ref io_InputNum);
                 if (!isInputValid)
                 {
-                    Console.WriteLine("Not a valid input. Please enter 8-char string, with only digits or english letters: ");
+                    Console.WriteLine("Not a valid input. Please enter {0}-char string, with only digits or english letters: ", lenOfInput);
                 }
             }
             while (!isInputValid);
