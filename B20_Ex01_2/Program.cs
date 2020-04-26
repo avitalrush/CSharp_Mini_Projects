@@ -11,9 +11,9 @@ namespace B20_Ex01_2
 
         public static void PrintStarsHourglass(int i_OriginNumOfStars)
         {
-            bool isAscending = false;
+            bool isAscending = false;   //const v_IsAscending = true
 
-            PrintStarsHourglassRec(i_OriginNumOfStars, i_OriginNumOfStars, isAscending);
+            PrintStarsHourglassRec(i_OriginNumOfStars, i_OriginNumOfStars, isAscending);    //!v_IsAscending 
         }
 
         public static void PrintStarsHourglassRec(int i_OriginNumOfStars, int i_CurrentNumOfStars, bool i_IsAscending)
@@ -21,14 +21,9 @@ namespace B20_Ex01_2
             int numOfSpacesToPrint = (i_OriginNumOfStars - i_CurrentNumOfStars) / 2;
             int numOfStarsToPrint = i_CurrentNumOfStars;
 
-            // VERSION WITH NO EXPLICIT RETURN CALL, ONLY 1 RETURN CALL AT THE END OF VOID METHOD:
-
             if (i_CurrentNumOfStars <= i_OriginNumOfStars)
             {
-                PrintSpacesStars(numOfSpacesToPrint, numOfStarsToPrint);    // PRINT LINE OF SPACES AND STARS
-
-                // PREPARE THE PARAMETERS FOR THE NEXT REC CALL
-
+                PrintSpacesStars(numOfSpacesToPrint, numOfStarsToPrint);
                 if (i_CurrentNumOfStars == 1)
                 {
                     i_CurrentNumOfStars += 2;
@@ -46,43 +41,11 @@ namespace B20_Ex01_2
                     }
                 }
 
-                PrintStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars, i_IsAscending);    // REC CALL
+                PrintStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars, i_IsAscending);
             }
-
-            /*
-            // VERSION WITH 1 EXPLICIT RETURN CALL + 1 RETURN CALL AT THE END OF VOID METHOD:
-
-            if (i_CurrentNumOfStars > i_OriginNumOfStars)
-            {
-                return;
-            }
-
-            PrintSpacesStars(numOfSpacesToPrint, numOfStarsToPrint);    // PRINT LINE OF SPACES AND STARS
-
-            // PREPARE THE PARAMETERS FOR THE NEXT REC CALL
-
-            if (i_CurrentNumOfStars == 1)
-            {
-                i_CurrentNumOfStars += 2;
-                i_IsAscending = true;
-            }
-            else
-            {
-                if (!i_IsAscending)
-                {
-                    i_CurrentNumOfStars -= 2;
-                }
-                else
-                {
-                    i_CurrentNumOfStars += 2;
-                }
-            }
-
-            PrintStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars, i_IsAscending);    // REC CALL
-            */
         }
 
-        public static void PrintSpacesStars(int i_NumOfSpaces, int i_NumOfStars)
+        public static void PrintSpacesStars(int i_NumOfSpaces, int i_NumOfStars)    //naming: PrintSpacesAndStars
         {
             System.Text.StringBuilder lineToPrint = new System.Text.StringBuilder();
 

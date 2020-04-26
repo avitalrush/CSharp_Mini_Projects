@@ -17,8 +17,6 @@ namespace B20_Ex01_5
             Console.WriteLine("Please enter {0}-digit input: ", lenOfInput);
             inputStr = getValidInput();
             printStatisticsOfInput(inputStr);
-
-            Console.ReadLine();
         }
 
         private static string getValidInput()
@@ -89,10 +87,11 @@ namespace B20_Ex01_5
             int countHowManyDigitsDividedByThree = getHowManyDigitsDividedByThree(i_Str);
             int countHowManyDigitsGreaterThanUnits = getHowManyDigitsGreaterThanUnits(i_Str);
             string outputMsg = string.Format(
-@"In {0} the biggest digit is: {1}
-the smallest digit is: {2}
-there are {3} digits that can be divided by 3
-there are {4} digits greater than the units digit.",
+@"In {0} - 
+The largest digit is {1}
+The smallest digit is {2}
+There are {3} digits that can be divided by 3
+there are {4} digits greater than the units digit",
             i_Str, 
             maxDigit, 
             minDigit, 

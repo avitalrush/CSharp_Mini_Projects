@@ -4,11 +4,6 @@ namespace B20_Ex01_4
 {
     public class Program
     {
-        //private const int k_LenOfInput = 8;
-        //private static bool s_IsLettersInput = false;
-        //private static bool s_IsDigitsInput = false;
-        // private static int s_InputNum = 0;
-
         public static void Main()
         {
             start();
@@ -25,8 +20,6 @@ namespace B20_Ex01_4
             Console.WriteLine("Please enter {0}-char string, with only digits or english letters: ", lenOfInput);
             inputStr = getValidInput(ref isLettersInput, ref isDigitsInput, ref inputNum);
             analyzeInputString(inputStr, isLettersInput, isDigitsInput, inputNum);
-
-            Console.ReadLine();
         }
 
         private static string getValidInput(ref bool io_IsLettersInput, ref bool io_IsDigitsInput, ref int io_InputNum)
@@ -120,27 +113,6 @@ namespace B20_Ex01_4
             }
 
             return stringContainsOnlyDigits;
-
-            /*
-
-            bool stringContainsOnlyDigits = true;
-
-            for (int i = 0; i < i_Str.Length && stringContainsOnlyDigits; i++)
-            {
-                if (!(char.IsDigit(i_Str[i])))
-                {
-                    stringContainsOnlyDigits = false;
-                }
-            }
-
-            if (stringContainsOnlyDigits)
-            {
-                s_IsDigitsInput = true;
-            }
-
-            return stringContainsOnlyDigits;
-
-            */
         }
 
         private static void analyzeInputString(string i_Str, bool i_IsLettersInput, bool i_IsDigitsInput, int i_InputNum)
@@ -195,7 +167,6 @@ namespace B20_Ex01_4
 
         private static bool isDividedByFive(int i_Num)
         {
-            // int numFromStr = int.Parse(i_Str);
             return i_Num % 5 == 0;
         }
 

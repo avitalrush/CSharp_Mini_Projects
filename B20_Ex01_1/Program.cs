@@ -4,9 +4,6 @@ namespace B20_Ex01_1
 {
     public class Program
     {
-        //private const int k_NumOfNumbers = 3;
-        //private const int k_LenOfInput = 9;
-
         public static void Main()
         {
             start();
@@ -17,50 +14,41 @@ namespace B20_Ex01_1
             int inputInDecimal1, inputInDecimal2, inputInDecimal3, numOfNumbers = 3, lenOfInput = 9;
             string inputInBinary1, inputInBinary2, inputInBinary3;
 
-            //Console.WriteLine("Please enter " + numOfNumbers + " " + lenOfInput + "-digits binary numbers.", numOfNumbers, lenOfInput);
-            Console.WriteLine("Please enter {0} {1}-digits binary numbers.", numOfNumbers, lenOfInput);
-
+            Console.WriteLine("Please enter {0} {1}-digits binary numbers", numOfNumbers, lenOfInput);
             Console.WriteLine("Please enter the first number: ");
             inputInBinary1 = getValidInput();
-
             Console.WriteLine("Please enter the second number: ");
             inputInBinary2 = getValidInput();
-
             Console.WriteLine("Please enter the third number: ");
             inputInBinary3 = getValidInput();
-
             inputInDecimal1 = convertBinaryToDecimal(inputInBinary1);
             inputInDecimal2 = convertBinaryToDecimal(inputInBinary2);
             inputInDecimal3 = convertBinaryToDecimal(inputInBinary3);
-
             printStatisticsOfInput(inputInDecimal1, inputInDecimal2, inputInDecimal3, inputInBinary1, inputInBinary2, inputInBinary3);
-
-            Console.ReadLine();
         }
 
         private static string getValidInput()
         {
             string inputStr;
-            bool isValidInput;
+            bool isValidInput;  //inputIsValid = false
 
             do
             {
                 inputStr = getInput();
-                isValidInput = checkIfValidInput(inputStr);
-
+                isValidInput = checkIfValidInput(inputStr);     //change name to checkIfInputIsValid
                 if (!isValidInput)
                 {
                     Console.WriteLine("Not valid input. Please enter a valid input: ");
                 }
             }
-            while (isValidInput == !true);
+            while (isValidInput == !true);  // !inputIsValid
 
             return inputStr;
         }
 
         private static string getInput()
         {
-            string inputStr = Console.ReadLine();
+            string inputStr = Console.ReadLine();//can be one liner ( return Console....) - lo kriti aval
 
             return inputStr;
         }
@@ -68,7 +56,7 @@ namespace B20_Ex01_1
         private static void printStatisticsOfInput(int i_InputNum1, int i_InputNum2, int i_InputNum3,
                                                    string i_InputStr1, string i_InputStr2, string i_InputStr3)
         {
-            string decNumStr1 = i_InputNum1.ToString();
+            string decNumStr1 = i_InputNum1.ToString();     // (optional)consider declaring all the variables at the beginning
             string decNumStr2 = i_InputNum2.ToString();
             string decNumStr3 = i_InputNum3.ToString();
             int numOfNumbers = 3;
@@ -79,16 +67,16 @@ namespace B20_Ex01_1
             int maxOfInputs = getMaxNum(i_InputNum1, i_InputNum2, i_InputNum3);
             int minOfInputs = getMinNum(i_InputNum1, i_InputNum2, i_InputNum3);
             string outputMsg = string.Format(
-@"The input numbers in Decimal Format are:
+@"The input numbers in Decimal Format are
 {0}
 {1}
 {2}
-Average num of Zeros in all {3} numbers is: {4:0.##}
-Average num of Ones in all {3} numbers is: {5:0.##}
+Average number of Zeros in all {3} numbers is {4:0.##}
+Average number of Ones in all {3} numbers is {5:0.##}
 {6} of the {3} input numbers are Power of 2
 {7} of the {3} input numbers' digits are in Ascending order
-The Max num is {8}
-The Min num is {9}", 
+The largest number is {8}
+The smallest number is {9}", 
             i_InputNum1, 
             i_InputNum2, 
             i_InputNum3, 
@@ -101,41 +89,16 @@ The Min num is {9}",
             minOfInputs);
             
             Console.WriteLine(outputMsg);
-
-            /*
-            Console.WriteLine("The input numbers in Decimal Format are:");
-            printDecNum(i_InputNum1);
-            printDecNum(i_InputNum2);
-            printDecNum(i_InputNum3);
-
-            getAvgNumOfZerosInNum(i_InputStr1, i_InputStr2, i_InputStr3);
-            getAvgNumOfOnesInNum(i_InputStr1, i_InputStr2, i_InputStr3);
-
-            getHowManyArePowersOfTwo(i_InputNum1, i_InputNum2, i_InputNum3);
-
-            getHowManyAreAscOrder(decNumStr1, decNumStr2, decNumStr3);
-
-            getMaxNum(i_InputNum1, i_InputNum2, i_InputNum3);
-            getMinNum(i_InputNum1, i_InputNum2, i_InputNum3);
-
-            */
         }
 
-        /*
-        private static void printDecNum(int i_Num)
-        {
-            Console.WriteLine(i_Num);
-        }
-        */
-
-        private static float getAvgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3)
+        private static float getAvgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3) //no need this function, call avgNumOfZerosInNum directly
         {
             float avg = avgNumOfZerosInNum(i_Str1, i_Str2, i_Str3);
 
             return avg;
         }
 
-        private static float avgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3)
+        private static float avgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3)       //naming: getAvgNumOfZerosInStrNumbers
         {
             int totalZerosCount = 0, numOfNumbers = 3;
             float avgOfZeros = 0;
@@ -143,13 +106,14 @@ The Min num is {9}",
             totalZerosCount += countNumOfZeros(i_Str1);
             totalZerosCount += countNumOfZeros(i_Str2);
             totalZerosCount += countNumOfZeros(i_Str3);
-
+            
             return avgOfZeros = (float)totalZerosCount / numOfNumbers;
+            //return (float)totalZerosCount / numOfNumbers;
         }
 
         private static int countNumOfZeros(string i_Str)
         {
-            int countZeros = 0, lenOfInput = 9;
+            int countZeros = 0, lenOfInput = 9;     //lengthOfInput
 
             for (int i = 0; i < lenOfInput; i++)
             {
@@ -162,14 +126,14 @@ The Min num is {9}",
             return countZeros;
         }
 
-        private static float getAvgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)
+        private static float getAvgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)      //NO need this function, call the inner one directly
         {
             float avg = avgNumOfOnesInNum(i_Str1, i_Str2, i_Str3);
 
             return avg;
         }
 
-        private static float avgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)
+        private static float avgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)     //code duplication(avgNumOfZerosInNum), consider to pass '0'/ '1' as parameter and re-use
         {
             int totalOnesCount = 0, numOfNumbers = 3;
             float avgOfOnes = 0;
@@ -181,7 +145,7 @@ The Min num is {9}",
             return avgOfOnes = (float)totalOnesCount / numOfNumbers;
         }
 
-        private static int countNumOfOnes(string i_Str)
+        private static int countNumOfOnes(string i_Str)     //code duplication(countNumOfZeros), consider to pass '0'/ '1' as parameter and re-use
         {
             int countOnes = 0, lenOfInput = 9;
 
@@ -196,7 +160,7 @@ The Min num is {9}",
             return countOnes;
         }
 
-        private static int getHowManyArePowersOfTwo(int i_Num1, int i_Num2, int i_Num3)
+        private static int getHowManyArePowersOfTwo(int i_Num1, int i_Num2, int i_Num3)     //naming: getHowManyNumbersArePowersOfTwo
         {
             int countPowersOfTwo = 0;
 
@@ -218,7 +182,7 @@ The Min num is {9}",
             return countPowersOfTwo;
         }
 
-        private static bool isPowerOfTwo(int i_Num)
+        private static bool isPowerOfTwo(int i_Num)     //naming: numberIsPowerOfTwo,
         {
             while (((i_Num % 2) == 0) && i_Num > 1)
             {
@@ -288,7 +252,7 @@ The Min num is {9}",
 
         private static int convertBinaryToDecimal(string i_Str)
         {
-            int currentBinaryDigit;
+            int currentBinaryDigit;     //int declare can be in one line
             int decimalNumber = 0;
             int mostRightIndex = i_Str.Length - 1;
             int powerByIndex;
@@ -315,19 +279,19 @@ The Min num is {9}",
             return i_BinaryDigit * powerOfTwoByIndex;
         }
 
-        private static bool checkIfValidInput(string i_Str)
+        private static bool checkIfValidInput(string i_Str) //i_input, naming: checkIfInputIsValid
         {
-            return isInputLenValid(i_Str) && isInputContainOnlyZeroOne(i_Str) && !isInputZero(i_Str);
+            return isInputLenValid(i_Str) && isInputContainOnlyZeroOne(i_Str) && !isInputZero(i_Str);//lengthOfInputIsValid(i_input) && inputContainOnlyBinaryDigits(i_input) && !inputIsZero(i_input)
         }
 
-        private static bool isInputLenValid(string i_Str)
+        private static bool isInputLenValid(string i_Str)     //naming: lengthOfInputIsValid
         {
             int lenOfInput = 9;
 
             return i_Str.Length == lenOfInput;
         }
 
-        private static bool isInputContainOnlyZeroOne(string i_Str)
+        private static bool isInputContainOnlyZeroOne(string i_Str)     //naimng: inputContainOnlyBinaryDigits
         {
             bool inputContainOnlyZeroOne = true;
 
@@ -342,7 +306,7 @@ The Min num is {9}",
             return inputContainOnlyZeroOne;
         }
 
-        private static bool isInputZero(string i_Str)
+        private static bool isInputZero(string i_Str)   //naming: inputIsZero
         {
             string strZero = "000000000";
 
