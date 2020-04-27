@@ -6,37 +6,32 @@ namespace B20_Ex01_2
     {
         public static void Main()
         {
-            PrintStarsHourglass(5);
+            PrintHourglass(5);
         }
 
-        public static void PrintStarsHourglass(int i_OriginNumOfStars)
+        public static void PrintHourglass(int i_OriginalNumOfStars)
         {
-            bool isAscending = false;
+            bool ascending = true;
 
-            PrintStarsHourglassRec(i_OriginNumOfStars, i_OriginNumOfStars, isAscending);
+            PrintHourglassRec(i_OriginalNumOfStars, i_OriginalNumOfStars, !ascending);
         }
 
-        public static void PrintStarsHourglassRec(int i_OriginNumOfStars, int i_CurrentNumOfStars, bool i_IsAscending)
+        public static void PrintHourglassRec(int i_OriginalNumOfStars, int i_CurrentNumOfStars, bool i_Ascending)
         {
-            int numOfSpacesToPrint = (i_OriginNumOfStars - i_CurrentNumOfStars) / 2;
+            int numOfSpacesToPrint = (i_OriginalNumOfStars - i_CurrentNumOfStars) / 2;
             int numOfStarsToPrint = i_CurrentNumOfStars;
 
-            // VERSION WITH NO EXPLICIT RETURN CALL, ONLY 1 RETURN CALL AT THE END OF VOID METHOD:
-
-            if (i_CurrentNumOfStars <= i_OriginNumOfStars)
+            if (i_CurrentNumOfStars <= i_OriginalNumOfStars)
             {
-                PrintSpacesStars(numOfSpacesToPrint, numOfStarsToPrint);    // PRINT LINE OF SPACES AND STARS
-
-                // PREPARE THE PARAMETERS FOR THE NEXT REC CALL
-
+                PrintSpacesAndStars(numOfSpacesToPrint, numOfStarsToPrint);
                 if (i_CurrentNumOfStars == 1)
                 {
                     i_CurrentNumOfStars += 2;
-                    i_IsAscending = true;
+                    i_Ascending = true;
                 }
                 else
                 {
-                    if (!i_IsAscending)
+                    if (!i_Ascending)
                     {
                         i_CurrentNumOfStars -= 2;
                     }
@@ -46,43 +41,11 @@ namespace B20_Ex01_2
                     }
                 }
 
-                PrintStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars, i_IsAscending);    // REC CALL
+                PrintHourglassRec(i_OriginalNumOfStars, i_CurrentNumOfStars, i_Ascending);
             }
-
-            /*
-            // VERSION WITH 1 EXPLICIT RETURN CALL + 1 RETURN CALL AT THE END OF VOID METHOD:
-
-            if (i_CurrentNumOfStars > i_OriginNumOfStars)
-            {
-                return;
-            }
-
-            PrintSpacesStars(numOfSpacesToPrint, numOfStarsToPrint);    // PRINT LINE OF SPACES AND STARS
-
-            // PREPARE THE PARAMETERS FOR THE NEXT REC CALL
-
-            if (i_CurrentNumOfStars == 1)
-            {
-                i_CurrentNumOfStars += 2;
-                i_IsAscending = true;
-            }
-            else
-            {
-                if (!i_IsAscending)
-                {
-                    i_CurrentNumOfStars -= 2;
-                }
-                else
-                {
-                    i_CurrentNumOfStars += 2;
-                }
-            }
-
-            PrintStarsHourglassRec(i_OriginNumOfStars, i_CurrentNumOfStars, i_IsAscending);    // REC CALL
-            */
         }
 
-        public static void PrintSpacesStars(int i_NumOfSpaces, int i_NumOfStars)
+        public static void PrintSpacesAndStars(int i_NumOfSpaces, int i_NumOfStars)
         {
             System.Text.StringBuilder lineToPrint = new System.Text.StringBuilder();
 
