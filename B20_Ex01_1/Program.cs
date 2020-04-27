@@ -11,9 +11,11 @@ namespace B20_Ex01_1
 
         private static void start()
         {
-            int inputInDecimal1, inputInDecimal2, inputInDecimal3, numOfNumbers = 3, lenOfInput = 9;
+            int inputInDecimal1, inputInDecimal2, inputInDecimal3, numOfNumbers, lenOfInput;
             string inputInBinary1, inputInBinary2, inputInBinary3;
 
+            numOfNumbers = 3;
+            lenOfInput = 9;
             Console.WriteLine("Please enter {0} {1}-digits binary numbers", numOfNumbers, lenOfInput);
             Console.WriteLine("Please enter the first number: ");
             inputInBinary1 = getValidInput();
@@ -30,43 +32,45 @@ namespace B20_Ex01_1
         private static string getValidInput()
         {
             string inputStr;
-            bool isValidInput;  //inputIsValid = false
+            bool inputIsValid;
 
             do
             {
                 inputStr = getInput();
-                isValidInput = checkIfValidInput(inputStr);     //change name to checkIfInputIsValid
-                if (!isValidInput)
+                inputIsValid = checkIfInputIsValid(inputStr);
+                if (!inputIsValid)
                 {
                     Console.WriteLine("Not valid input. Please enter a valid input: ");
                 }
             }
-            while (isValidInput == !true);  // !inputIsValid
+            while (!inputIsValid);
 
             return inputStr;
         }
 
         private static string getInput()
         {
-            string inputStr = Console.ReadLine();//can be one liner ( return Console....) - lo kriti aval
-
-            return inputStr;
+            return Console.ReadLine();
         }
 
-        private static void printStatisticsOfInput(int i_InputNum1, int i_InputNum2, int i_InputNum3,
+        private static void printStatisticsOfInput(int i_InputDec1, int i_InputDec2, int i_InputDec3,
                                                    string i_InputStr1, string i_InputStr2, string i_InputStr3)
         {
-            string decNumStr1 = i_InputNum1.ToString();     // (optional)consider declaring all the variables at the beginning
-            string decNumStr2 = i_InputNum2.ToString();
-            string decNumStr3 = i_InputNum3.ToString();
-            int numOfNumbers = 3;
-            float avgOfZeros = getAvgNumOfZerosInNum(i_InputStr1, i_InputStr2, i_InputStr3);
-            float avgOfOnes = getAvgNumOfOnesInNum(i_InputStr1, i_InputStr2, i_InputStr3);
-            int countPowersOfTwo = getHowManyArePowersOfTwo(i_InputNum1, i_InputNum2, i_InputNum3);
-            int countAscOrder = getHowManyAreAscOrder(decNumStr1, decNumStr2, decNumStr3);
-            int maxOfInputs = getMaxNum(i_InputNum1, i_InputNum2, i_InputNum3);
-            int minOfInputs = getMinNum(i_InputNum1, i_InputNum2, i_InputNum3);
-            string outputMsg = string.Format(
+            string inputDecStr1, inputDecStr2, inputDecStr3, outputMsg;
+            int numOfNumbers, countPowersOfTwo, count, maxOfInputs, minOfInputs;
+            float avgOfZeros, avgOfOnes;
+
+            numOfNumbers = 3;
+            inputDecStr1 = i_InputDec1.ToString();
+            inputDecStr2 = i_InputDec2.ToString();
+            inputDecStr3 = i_InputDec3.ToString();
+            avgOfZeros = getAvgNumOfZerosInBinaryInput(i_InputStr1, i_InputStr2, i_InputStr3);
+            avgOfOnes = getAvgNumOfOnesInBinaryInput(i_InputStr1, i_InputStr2, i_InputStr3);
+            countPowersOfTwo = getHowManyNumbersArePowersOfTwo(i_InputDec1, i_InputDec2, i_InputDec3);
+            count = getHowManyNumbersAreInAscendingOrder(inputDecStr1, inputDecStr2, inputDecStr3);
+            maxOfInputs = getMaxNum(i_InputDec1, i_InputDec2, i_InputDec3);
+            minOfInputs = getMinNum(i_InputDec1, i_InputDec2, i_InputDec3);
+            outputMsg = string.Format(
 @"The input numbers in Decimal Format are
 {0}
 {1}
@@ -76,48 +80,33 @@ Average number of Ones in all {3} numbers is {5:0.##}
 {6} of the {3} input numbers are Power of 2
 {7} of the {3} input numbers' digits are in Ascending order
 The largest number is {8}
-The smallest number is {9}", 
-            i_InputNum1, 
-            i_InputNum2, 
-            i_InputNum3, 
-            numOfNumbers, 
-            avgOfZeros, 
-            avgOfOnes, 
-            countPowersOfTwo, 
-            countAscOrder, 
-            maxOfInputs, 
-            minOfInputs);
-            
+The smallest number is {9}",
+                i_InputDec1, i_InputDec2, i_InputDec3, numOfNumbers, avgOfZeros, avgOfOnes, countPowersOfTwo, count, maxOfInputs, minOfInputs);
             Console.WriteLine(outputMsg);
         }
 
-        private static float getAvgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3) //no need this function, call avgNumOfZerosInNum directly
+        private static float getAvgNumOfZerosInBinaryInput(string i_InputStr1, string i_InputStr2, string i_InputStr3)
         {
-            float avg = avgNumOfZerosInNum(i_Str1, i_Str2, i_Str3);
-
-            return avg;
-        }
-
-        private static float avgNumOfZerosInNum(string i_Str1, string i_Str2, string i_Str3)       //naming: getAvgNumOfZerosInStrNumbers
-        {
-            int totalZerosCount = 0, numOfNumbers = 3;
+            int totalZerosCount = 0;
+            int numOfNumbers = 3;
             float avgOfZeros = 0;
 
-            totalZerosCount += countNumOfZeros(i_Str1);
-            totalZerosCount += countNumOfZeros(i_Str2);
-            totalZerosCount += countNumOfZeros(i_Str3);
-            
-            return avgOfZeros = (float)totalZerosCount / numOfNumbers;
-            //return (float)totalZerosCount / numOfNumbers;
+            totalZerosCount += countNumOfZeros(i_InputStr1);
+            totalZerosCount += countNumOfZeros(i_InputStr2);
+            totalZerosCount += countNumOfZeros(i_InputStr3);
+            avgOfZeros = (float)totalZerosCount / numOfNumbers;
+
+            return avgOfZeros;
         }
 
-        private static int countNumOfZeros(string i_Str)
+        private static int countNumOfZeros(string i_InputStr)
         {
-            int countZeros = 0, lenOfInput = 9;     //lengthOfInput
+            int countZeros = 0;
+            int lenOfInput = 9;
 
             for (int i = 0; i < lenOfInput; i++)
             {
-                if (i_Str[i] == '0')
+                if (i_InputStr[i] == '0')
                 {
                     countZeros++;
                 }
@@ -126,32 +115,26 @@ The smallest number is {9}",
             return countZeros;
         }
 
-        private static float getAvgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)      //NO need this function, call the inner one directly
-        {
-            float avg = avgNumOfOnesInNum(i_Str1, i_Str2, i_Str3);
-
-            return avg;
-        }
-
-        private static float avgNumOfOnesInNum(string i_Str1, string i_Str2, string i_Str3)     //code duplication(avgNumOfZerosInNum), consider to pass '0'/ '1' as parameter and re-use
+        private static float getAvgNumOfOnesInBinaryInput(string i_InputStr1, string i_InputStr2, string i_InputStr3)
         {
             int totalOnesCount = 0, numOfNumbers = 3;
             float avgOfOnes = 0;
 
-            totalOnesCount += countNumOfOnes(i_Str1);
-            totalOnesCount += countNumOfOnes(i_Str2);
-            totalOnesCount += countNumOfOnes(i_Str3);
+            totalOnesCount += countNumOfOnes(i_InputStr1);
+            totalOnesCount += countNumOfOnes(i_InputStr2);
+            totalOnesCount += countNumOfOnes(i_InputStr3);
+            avgOfOnes = (float)totalOnesCount / numOfNumbers;
 
-            return avgOfOnes = (float)totalOnesCount / numOfNumbers;
+            return avgOfOnes;
         }
 
-        private static int countNumOfOnes(string i_Str)     //code duplication(countNumOfZeros), consider to pass '0'/ '1' as parameter and re-use
+        private static int countNumOfOnes(string i_InputStr)
         {
             int countOnes = 0, lenOfInput = 9;
 
             for (int i = 0; i < lenOfInput; i++)
             {
-                if (i_Str[i] == '1')
+                if (i_InputStr[i] == '1')
                 {
                     countOnes++;
                 }
@@ -160,21 +143,21 @@ The smallest number is {9}",
             return countOnes;
         }
 
-        private static int getHowManyArePowersOfTwo(int i_Num1, int i_Num2, int i_Num3)     //naming: getHowManyNumbersArePowersOfTwo
+        private static int getHowManyNumbersArePowersOfTwo(int i_Num1, int i_Num2, int i_Num3)
         {
             int countPowersOfTwo = 0;
 
-            if (isPowerOfTwo(i_Num1))
+            if (isNumberPowerOfTwo(i_Num1))
             {
                 countPowersOfTwo++;
             }
 
-            if (isPowerOfTwo(i_Num2))
+            if (isNumberPowerOfTwo(i_Num2))
             {
                 countPowersOfTwo++;
             }
 
-            if (isPowerOfTwo(i_Num3))
+            if (isNumberPowerOfTwo(i_Num3))
             {
                 countPowersOfTwo++;
             }
@@ -182,7 +165,7 @@ The smallest number is {9}",
             return countPowersOfTwo;
         }
 
-        private static bool isPowerOfTwo(int i_Num)     //naming: numberIsPowerOfTwo,
+        private static bool isNumberPowerOfTwo(int i_Num)
         {
             while (((i_Num % 2) == 0) && i_Num > 1)
             {
@@ -192,35 +175,35 @@ The smallest number is {9}",
             return i_Num == 1;
         }
 
-        private static int getHowManyAreAscOrder(string i_Str1, string i_Str2, string i_Str3)
+        private static int getHowManyNumbersAreInAscendingOrder(string i_InputStr1, string i_InputStr2, string i_InputStr3)
         {
-            int countAscOrder = 0;
+            int count = 0;
 
-            if (isDigitsInAscendingOrder(i_Str1))
+            if (areDigitsInAscendingOrder(i_InputStr1))
             {
-                countAscOrder++;
+                count++;
             }
 
-            if (isDigitsInAscendingOrder(i_Str2))
+            if (areDigitsInAscendingOrder(i_InputStr2))
             {
-                countAscOrder++;
+                count++;
             }
 
-            if (isDigitsInAscendingOrder(i_Str3))
+            if (areDigitsInAscendingOrder(i_InputStr3))
             {
-                countAscOrder++;
+                count++;
             }
 
-            return countAscOrder;
+            return count;
         }
 
-        private static bool isDigitsInAscendingOrder(string i_Str)
+        private static bool areDigitsInAscendingOrder(string i_InputStr)
         {
             bool digitsInAscendingOrder = true;
 
-            for (int i = 1; i < i_Str.Length && digitsInAscendingOrder; i++)
+            for (int i = 1; i < i_InputStr.Length && digitsInAscendingOrder; i++)
             {
-                if (i_Str[i] <= i_Str[i - 1])
+                if (i_InputStr[i] <= i_InputStr[i - 1])
                 {
                     digitsInAscendingOrder = false;
                 }
@@ -250,26 +233,25 @@ The smallest number is {9}",
             return i_Chr - '0';
         }
 
-        private static int convertBinaryToDecimal(string i_Str)
+        private static int convertBinaryToDecimal(string i_InputStr)
         {
-            int currentBinaryDigit;     //int declare can be in one line
+            int currentBinaryDigit, powerByIndex;
             int decimalNumber = 0;
-            int mostRightIndex = i_Str.Length - 1;
-            int powerByIndex;
+            int mostRightIndex = i_InputStr.Length - 1;
 
             for (int indexInStr = mostRightIndex; indexInStr >= 0; indexInStr--)
             {
-                currentBinaryDigit = convertCharToInt(i_Str[indexInStr]);
-                powerByIndex = getPowerByIndex(i_Str, indexInStr);
+                currentBinaryDigit = convertCharToInt(i_InputStr[indexInStr]);
+                powerByIndex = getPowerByIndex(i_InputStr, indexInStr);
                 decimalNumber += multiplyDigitByTwoPower(currentBinaryDigit, powerByIndex);
             }
 
             return decimalNumber;
         }
 
-        private static int getPowerByIndex(string i_Str, int i_IndexInStr)
+        private static int getPowerByIndex(string i_InputStr, int i_IndexInStr)
         {
-            return i_Str.Length - i_IndexInStr - 1;
+            return i_InputStr.Length - i_IndexInStr - 1;
         }
 
         private static int multiplyDigitByTwoPower(int i_BinaryDigit, int i_PowerByIndex)
@@ -279,25 +261,25 @@ The smallest number is {9}",
             return i_BinaryDigit * powerOfTwoByIndex;
         }
 
-        private static bool checkIfValidInput(string i_Str) //i_input, naming: checkIfInputIsValid
+        private static bool checkIfInputIsValid(string i_Input)
         {
-            return isInputLenValid(i_Str) && isInputContainOnlyZeroOne(i_Str) && !isInputZero(i_Str);//lengthOfInputIsValid(i_input) && inputContainOnlyBinaryDigits(i_input) && !inputIsZero(i_input)
+            return isInputLenValid(i_Input) && isInputContainOnlyZeroOne(i_Input) && !isInputZero(i_Input);
         }
 
-        private static bool isInputLenValid(string i_Str)     //naming: lengthOfInputIsValid
+        private static bool isInputLenValid(string i_InputStr)
         {
             int lenOfInput = 9;
 
-            return i_Str.Length == lenOfInput;
+            return i_InputStr.Length == lenOfInput;
         }
 
-        private static bool isInputContainOnlyZeroOne(string i_Str)     //naimng: inputContainOnlyBinaryDigits
+        private static bool isInputContainOnlyZeroOne(string i_InputStr)
         {
             bool inputContainOnlyZeroOne = true;
 
-            for (int i = 0; i < i_Str.Length && inputContainOnlyZeroOne; i++)
+            for (int i = 0; i < i_InputStr.Length && inputContainOnlyZeroOne; i++)
             {
-                if (i_Str[i] != '0' && i_Str[i] != '1')
+                if (i_InputStr[i] != '0' && i_InputStr[i] != '1')
                 {
                     inputContainOnlyZeroOne = false;
                 }
@@ -306,11 +288,11 @@ The smallest number is {9}",
             return inputContainOnlyZeroOne;
         }
 
-        private static bool isInputZero(string i_Str)   //naming: inputIsZero
+        private static bool isInputZero(string i_InputStr)
         {
             string strZero = "000000000";
 
-            return i_Str == strZero;
+            return i_InputStr == strZero;
         }
     }
 }

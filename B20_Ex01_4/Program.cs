@@ -14,152 +14,135 @@ namespace B20_Ex01_4
             int inputNum = 0;
             int lenOfInput = 8;
             string inputStr;
-            bool isLettersInput = false;
-            bool isDigitsInput = false;
+            bool inputIsLetters = false;
+            bool inputIsDigits = false;
 
             Console.WriteLine("Please enter {0}-char string, with only digits or english letters: ", lenOfInput);
-            inputStr = getValidInput(ref isLettersInput, ref isDigitsInput, ref inputNum);
-            analyzeInputString(inputStr, isLettersInput, isDigitsInput, inputNum);
+            inputStr = getValidInput(ref inputIsLetters, ref inputIsDigits, ref inputNum);
+            analyzeInput(inputStr, inputIsLetters, inputIsDigits, inputNum);
         }
 
-        private static string getValidInput(ref bool io_IsLettersInput, ref bool io_IsDigitsInput, ref int io_InputNum)
+        private static string getValidInput(ref bool io_InputIsLetters, ref bool io_InputIsDigits, ref int io_InputNum)
         {
             int lenOfInput = 8;
             string inputStr;
-            bool isInputValid;
+            bool validInput;
 
             do
             {
                 inputStr = getInput();
-                isInputValid = validateInput(inputStr, ref io_IsLettersInput, ref io_IsDigitsInput, ref io_InputNum);
-                if (!isInputValid)
+                validInput = validateInput(inputStr, ref io_InputIsLetters, ref io_InputIsDigits, ref io_InputNum);
+                if (!validInput)
                 {
                     Console.WriteLine("Not a valid input. Please enter {0}-char string, with only digits or english letters: ", lenOfInput);
                 }
             }
-            while (!isInputValid);
+            while (!validInput);
 
             return inputStr;
         }
 
         private static string getInput()
         {
-            string inputStr = Console.ReadLine();
-
-            return inputStr;
+            return Console.ReadLine();
         }
 
-        private static bool validateInput(string i_Str, ref bool io_IsLettersInput, ref bool io_IsDigitsInput, ref int io_InputNum)
+        private static bool validateInput(string i_InputStr, ref bool io_InputIsLetters, ref bool io_InputIsDigits, ref int io_InputNum)
         {
-            return isInputLenValid(i_Str) && isInputTypeValid(i_Str, ref io_IsLettersInput, ref io_IsDigitsInput, ref io_InputNum);
+            return isInputLenValid(i_InputStr) && isInputTypeValid(i_InputStr, ref io_InputIsLetters, ref io_InputIsDigits, ref io_InputNum);
         }
 
-        private static bool isInputLenValid(string i_Str)
+        private static bool isInputLenValid(string i_InputStr)
         {
             int lenOfInput = 8;
           
-            return i_Str.Length == lenOfInput;
+            return i_InputStr.Length == lenOfInput;
         }
 
-        private static bool isInputTypeValid(string i_Str, ref bool io_IsLettersInput, ref bool io_IsDigitsInput, ref int io_InputNum)
+        private static bool isInputTypeValid(string i_InputStr, ref bool io_InputIsLetters, ref bool io_InputIsDigits, ref int io_InputNum)
         {
-            bool stringContainsOnlyLettersOrDigits = isInputContainsOnlyDigitsOrLetters(i_Str);
+            isLettersInput(i_InputStr, ref io_InputIsLetters);
+            isDigitsInput(i_InputStr, ref io_InputIsDigits, ref io_InputNum);
 
-            return stringContainsOnlyLettersOrDigits && (isLettersInput(i_Str, ref io_IsLettersInput) || isDigitsInput(i_Str, ref io_IsDigitsInput, ref io_InputNum));
+            return io_InputIsLetters || io_InputIsDigits;
         }
 
-        private static bool isInputContainsOnlyDigitsOrLetters(string i_Str)
+        private static void isLettersInput(string i_InputStr, ref bool io_InputIsLetters)
         {
-            bool stringContainsOnlyLettersOrDigits = true;
+            bool inputContainsOnlyLetters = true;
 
-            for (int i = 0; i < i_Str.Length && stringContainsOnlyLettersOrDigits; i++)
+            for(int i = 0; i < i_InputStr.Length && inputContainsOnlyLetters; i++)
             {
-                if (!char.IsLetter(i_Str[i]) && !char.IsDigit(i_Str[i]))
+                if (!char.IsLetter(i_InputStr[i]))
                 {
-                    stringContainsOnlyLettersOrDigits = false;
+                    inputContainsOnlyLetters = false;
                 }
             }
 
-            return stringContainsOnlyLettersOrDigits;
+            if(inputContainsOnlyLetters)
+            {
+                io_InputIsLetters = true;
+            }
         }
 
-        private static bool isLettersInput(string i_Str, ref bool io_IsLettersInput)
+        private static void isDigitsInput(string i_InputStr, ref bool io_InputIsDigits, ref int o_InputNum)
         {
-            bool stringContainsOnlyLetters = true;
+            System.Globalization.NumberStyles onlyDigits = System.Globalization.NumberStyles.None;
+            bool inputContainsOnlyDigits = int.TryParse(i_InputStr, onlyDigits, null, out o_InputNum);
 
-            for(int i = 0; i < i_Str.Length && stringContainsOnlyLetters; i++)
+            if (inputContainsOnlyDigits)
             {
-                if (!char.IsLetter(i_Str[i]))
-                {
-                    stringContainsOnlyLetters = false;
-                }
+                io_InputIsDigits = true;
             }
-
-            if(stringContainsOnlyLetters)
-            {
-                io_IsLettersInput = true;
-            }
-
-            return stringContainsOnlyLetters;
         }
 
-        private static bool isDigitsInput(string i_Str, ref bool io_IsDigitsInput, ref int o_InputNum)
+        private static void analyzeInput(string i_InputStr, bool i_InputIsLetters, bool i_InputIsDigits, int i_InputNum)
         {
-            bool stringContainsOnlyDigits = int.TryParse(i_Str, out o_InputNum);
+            int countUpperCase;
 
-            if (stringContainsOnlyDigits)
+            if (isPalindrome(i_InputStr))
             {
-                io_IsDigitsInput = true;
-            }
-
-            return stringContainsOnlyDigits;
-        }
-
-        private static void analyzeInputString(string i_Str, bool i_IsLettersInput, bool i_IsDigitsInput, int i_InputNum)
-        {
-            if (isPalindrome(i_Str))
-            {
-                Console.WriteLine("{0} is a Palindrome", i_Str);
+                Console.WriteLine("{0} is a Palindrome", i_InputStr);
             }
             else
             {
-                Console.WriteLine("{0} is NOT a Palindrome", i_Str);
+                Console.WriteLine("{0} is NOT a Palindrome", i_InputStr);
             }
 
-            if (i_IsDigitsInput)
+            if (i_InputIsDigits)
             {
                 if (isDividedByFive(i_InputNum))
                 {
-                    Console.WriteLine("{0} is divided by 5", i_Str);
+                    Console.WriteLine("{0} is divided by 5", i_InputStr);
                 }
                 else
                 {
-                    Console.WriteLine("{0} is NOT divided by 5", i_Str);
+                    Console.WriteLine("{0} is NOT divided by 5", i_InputStr);
                 }
             }
-            else if (i_IsLettersInput)
+            else if (i_InputIsLetters)
             {
-                int count = countUpperCaseLetters(i_Str);
-                Console.WriteLine("There are {0} uppercase letters in {1}", count, i_Str);
+                countUpperCase = countUpperCaseLetters(i_InputStr);
+                Console.WriteLine("There are {0} uppercase letters in {1}", countUpperCase, i_InputStr);
             }
         }
 
-        private static bool isPalindrome(string i_Str)
+        private static bool isPalindrome(string i_InputStr)
         {
-            int strLen = i_Str.Length;
+            int strLen = i_InputStr.Length;
             bool stringIsPalindrome;
 
-            if (strLen == 1 || strLen == 0)
+            if (strLen <= 1)
             {
                 stringIsPalindrome = true;
             }
-            else if (i_Str[0] != i_Str[strLen - 1]) 
+            else if (i_InputStr[0] != i_InputStr[strLen - 1]) 
             {
                 stringIsPalindrome = false;
             }
             else
             {
-                stringIsPalindrome = isPalindrome(i_Str.Substring(1, strLen - 2));
+                stringIsPalindrome = isPalindrome(i_InputStr.Substring(1, strLen - 2));
             }
 
             return stringIsPalindrome;
@@ -170,19 +153,20 @@ namespace B20_Ex01_4
             return i_Num % 5 == 0;
         }
 
-        private static int countUpperCaseLetters(string i_Str)
+        private static int countUpperCaseLetters(string i_InputStr)
         {
-            int upperCount = 0, lenOfInput = 8;
+            int count = 0;
+            int lenOfInput = 8;
 
             for (int i = 0; i <= lenOfInput - 1; i++) 
             {
-                if (char.IsUpper(i_Str[i]))
+                if (char.IsUpper(i_InputStr[i]))
                 {
-                    upperCount++;
+                    count++;
                 }
             }
 
-            return upperCount;
+            return count;
         }
     }
 }

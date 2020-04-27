@@ -15,50 +15,43 @@ namespace B20_Ex01_3
 
             Console.WriteLine("Please enter the height for the hour glass: ");
             inputHeight = getValidHeight();
-            B20_Ex01_2.Program.PrintStarsHourglass(inputHeight);
+            B20_Ex01_2.Program.PrintHourglass(inputHeight);
         }
 
         private static int getValidHeight()
         {
             int inputHeightNum;
             string inputHeightStr;
-            bool isHeightValid;
-            bool isHeightPositive;
+            bool validHeight, positiveHeight;
 
             do
             {
-                inputHeightStr = getHeight();
-                //inputIsValid = checkIfInputIsValid(inputHeightStr, out inputHeightNum)
-                //if (!inputIsValid)
-                // Console...
-                //... while(!inputIsValid)
-                inputHeightNum = validateHeightInput(inputHeightStr, out isHeightValid);
-                isHeightPositive = checkHeightPositivity(inputHeightNum);
-                if (!isHeightValid || !isHeightPositive)
+                inputHeightStr = getHeightInput();
+                inputHeightNum = validateHeightInputAndConvertToNum(inputHeightStr, out validHeight);
+                positiveHeight = checkHeightPositivity(inputHeightNum);
+                if (!validHeight || !positiveHeight)
                 {
                     Console.WriteLine("Not a valid input. Please enter a valid number for the hour glass height: ");
                 }
             }
-            while (!isHeightValid || !isHeightPositive);
+            while (!validHeight || !positiveHeight);
 
             return inputHeightNum;
         }
 
-        private static string getHeight()       //naming: getHeightInput
+        private static string getHeightInput()
         {
-            string inputHeightStr = Console.ReadLine();
-
-            return inputHeightStr;
+            return Console.ReadLine();
         }
 
-        private static int validateHeightInput(string i_InputHeightStr, out bool o_IsHeightValid)//
+        private static int validateHeightInputAndConvertToNum(string i_InputHeightStr, out bool o_ValidHeight)
         {
             int inputHeightNum;
 
-            o_IsHeightValid = int.TryParse(i_InputHeightStr, out inputHeightNum);
-            if (o_IsHeightValid)
+            o_ValidHeight = int.TryParse(i_InputHeightStr, out inputHeightNum);
+            if (o_ValidHeight)
             {
-                inputHeightNum = checkHeightParity(inputHeightNum);
+                inputHeightNum = fixHeightParity(inputHeightNum);
             }
 
             return inputHeightNum;
@@ -69,7 +62,7 @@ namespace B20_Ex01_3
             return i_InputHeightNum >= 0;
         }
 
-        private static int checkHeightParity(int i_InputHeightNum)
+        private static int fixHeightParity(int i_InputHeightNum)
         {
             if (i_InputHeightNum % 2 == 0)
             {
